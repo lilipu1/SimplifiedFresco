@@ -16,7 +16,6 @@ import android.graphics.drawable.Drawable;
 import android.os.SystemClock;
 import com.facebook.common.logging.FLog;
 import com.facebook.drawable.base.DrawableWithCaches;
-import com.facebook.drawee.drawable.DrawableProperties;
 import com.facebook.fresco.animation.backend.AnimationBackend;
 import com.facebook.fresco.animation.backend.AnimationInformation;
 import com.facebook.fresco.animation.frame.DropFramesFrameScheduler;

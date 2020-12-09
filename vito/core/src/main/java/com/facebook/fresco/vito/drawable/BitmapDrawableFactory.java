@@ -10,7 +10,7 @@ package com.facebook.fresco.vito.drawable;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.media.ExifInterface;
-import com.facebook.drawee.drawable.OrientedDrawable;
+
 import com.facebook.fresco.vito.core.FrescoExperiments;
 import com.facebook.fresco.vito.options.BorderOptions;
 import com.facebook.fresco.vito.options.ImageOptions;

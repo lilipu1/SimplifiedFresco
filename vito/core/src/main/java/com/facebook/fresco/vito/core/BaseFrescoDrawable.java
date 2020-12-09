@@ -14,8 +14,6 @@ import android.graphics.drawable.Drawable;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import com.facebook.common.references.CloseableReference;
-import com.facebook.drawee.drawable.FadeDrawable;
-import com.facebook.drawee.drawable.ScaleTypeDrawable;
 import com.facebook.drawee.drawable.ScalingUtils;
 import com.facebook.drawee.drawable.VisibilityCallback;
 import com.facebook.imagepipeline.image.CloseableImage;

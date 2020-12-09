@@ -21,9 +21,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
-import com.facebook.drawee.drawable.RoundedBitmapDrawable;
-import com.facebook.drawee.drawable.RoundedColorDrawable;
-import com.facebook.drawee.drawable.ScaleTypeDrawable;
+
 import com.facebook.drawee.drawable.ScalingUtils;
 import com.facebook.fresco.vito.core.Hierarcher;
 import com.facebook.fresco.vito.options.ImageOptions;

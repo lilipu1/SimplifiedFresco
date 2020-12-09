@@ -17,7 +17,6 @@ import com.facebook.drawee.backends.pipeline.info.ImageOrigin;
 import com.facebook.drawee.backends.pipeline.info.ImageOriginUtils;
 import com.facebook.drawee.backends.pipeline.info.internal.ImagePerfControllerListener2;
 import com.facebook.drawee.components.DeferredReleaser;
-import com.facebook.drawee.drawable.ScaleTypeDrawable;
 import com.facebook.drawee.drawable.ScalingUtils;
 import com.facebook.fresco.vito.core.CombinedImageListener;
 import com.facebook.fresco.vito.core.DrawableDataSubscriber;

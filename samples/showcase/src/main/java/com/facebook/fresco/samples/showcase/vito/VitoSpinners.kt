@@ -15,8 +15,6 @@ import android.graphics.PorterDuffColorFilter
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.InsetDrawable
 import androidx.core.content.ContextCompat
-import com.facebook.drawee.drawable.AutoRotateDrawable
-import com.facebook.drawee.drawable.ProgressBarDrawable
 import com.facebook.drawee.drawable.ScalingUtils
 import com.facebook.fresco.samples.showcase.R
 import com.facebook.fresco.samples.showcase.common.CustomScaleTypes

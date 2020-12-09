@@ -24,7 +24,6 @@ import androidx.appcompat.widget.SwitchCompat;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.info.ImagePerfDataListener;
 import com.facebook.drawee.controller.BaseControllerListener;
-import com.facebook.drawee.drawable.ProgressBarDrawable;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.fresco.samples.showcase.BaseShowcaseFragment;

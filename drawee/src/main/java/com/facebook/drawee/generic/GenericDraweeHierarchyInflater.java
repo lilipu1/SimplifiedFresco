@@ -16,7 +16,6 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 import com.facebook.drawee.R;
-import com.facebook.drawee.drawable.AutoRotateDrawable;
 import com.facebook.imagepipeline.systrace.FrescoSystrace;
 import com.facebook.infer.annotation.ReturnsOwnership;
 import javax.annotation.Nullable;
@@ -228,8 +227,7 @@ public class GenericDraweeHierarchyInflater {
 
     // wrap progress bar if auto-rotating requested
     if (builder.getProgressBarImage() != null && progressBarAutoRotateInterval > 0) {
-      builder.setProgressBarImage(
-          new AutoRotateDrawable(builder.getProgressBarImage(), progressBarAutoRotateInterval));
+
     }
 
     // set rounded corner radii if requested

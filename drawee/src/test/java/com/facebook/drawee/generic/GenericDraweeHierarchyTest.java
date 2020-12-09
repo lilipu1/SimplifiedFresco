@@ -20,12 +20,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
 import com.facebook.drawee.drawable.AndroidGraphicsTestUtils;
 import com.facebook.drawee.drawable.DrawableTestUtils;
-import com.facebook.drawee.drawable.FadeDrawable;
-import com.facebook.drawee.drawable.ForwardingDrawable;
-import com.facebook.drawee.drawable.Rounded;
-import com.facebook.drawee.drawable.RoundedBitmapDrawable;
-import com.facebook.drawee.drawable.RoundedCornersDrawable;
-import com.facebook.drawee.drawable.ScaleTypeDrawable;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import org.junit.Before;

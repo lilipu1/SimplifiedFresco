@@ -18,7 +18,6 @@ import com.facebook.common.references.CloseableReference;
 import com.facebook.datasource.DataSource;
 import com.facebook.drawee.backends.pipeline.info.ImageOrigin;
 import com.facebook.drawee.backends.pipeline.info.ImageOriginUtils;
-import com.facebook.drawee.drawable.ForwardingDrawable;
 import com.facebook.fresco.ui.common.DimensionsInfo;
 import com.facebook.fresco.vito.core.FrescoContext;
 import com.facebook.fresco.vito.core.FrescoDrawable;

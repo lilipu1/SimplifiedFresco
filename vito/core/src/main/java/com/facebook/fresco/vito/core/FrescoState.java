@@ -19,7 +19,6 @@ import com.facebook.datasource.DataSource;
 import com.facebook.datasource.DataSubscriber;
 import com.facebook.drawee.backends.pipeline.info.ImageOrigin;
 import com.facebook.drawee.components.DeferredReleaser;
-import com.facebook.drawee.drawable.ForwardingDrawable;
 import com.facebook.fresco.ui.common.DimensionsInfo;
 import com.facebook.fresco.vito.listener.ImageListener;
 import com.facebook.fresco.vito.options.ImageOptions;

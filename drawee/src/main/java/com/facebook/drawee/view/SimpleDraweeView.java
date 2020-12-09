@@ -21,6 +21,7 @@ import com.facebook.common.internal.Supplier;
 import com.facebook.common.util.UriUtil;
 import com.facebook.drawee.R;
 import com.facebook.drawee.controller.AbstractDraweeControllerBuilder;
+import com.facebook.drawee.drawable.VisibilityAwareDrawable;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.imagepipeline.request.ImageRequest;
@@ -143,6 +144,7 @@ public class SimpleDraweeView extends GenericDraweeView {
         DraweeController controller =
                 mControllerBuilder
                         .setCallerContext(callerContext)
+                        .setImageView(this)
                         .setUri(uri)
                         .setOldController(getController())
                         .build();

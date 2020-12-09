@@ -34,11 +34,8 @@ import com.facebook.drawee.controller.AbstractDraweeController;
 import com.facebook.drawee.controller.AbstractDraweeControllerBuilder;
 import com.facebook.drawee.debug.DebugControllerOverlayDrawable;
 import com.facebook.drawee.debug.listener.ImageLoadingTimeControllerListener;
-import com.facebook.drawee.drawable.ScaleTypeDrawable;
-import com.facebook.drawee.drawable.ScalingUtils;
 import com.facebook.drawee.drawable.ScalingUtils.ScaleType;
 import com.facebook.drawee.interfaces.DraweeController;
-import com.facebook.drawee.interfaces.DraweeHierarchy;
 import com.facebook.drawee.interfaces.SettableDraweeHierarchy;
 import com.facebook.fresco.ui.common.MultiUriHelper;
 import com.facebook.imagepipeline.cache.MemoryCache;
@@ -318,11 +315,6 @@ public class PipelineDraweeController
     return null;
   }
 
-  @Override
-  public void setHierarchy(@Nullable DraweeHierarchy hierarchy) {
-    super.setHierarchy(hierarchy);
-    maybeUpdateDebugOverlay(null);
-  }
 
   @Override
   public boolean isSameImageRequest(@Nullable DraweeController other) {
@@ -363,13 +355,7 @@ public class PipelineDraweeController
       @Nullable CloseableImage image, DebugControllerOverlayDrawable debugOverlay) {
     debugOverlay.setControllerId(getId());
 
-    final DraweeHierarchy draweeHierarchy = getHierarchy();
     ScaleType scaleType = null;
-    if (draweeHierarchy != null) {
-      final ScaleTypeDrawable scaleTypeDrawable =
-          ScalingUtils.getActiveScaleTypeDrawable(draweeHierarchy.getTopLevelDrawable());
-      scaleType = scaleTypeDrawable != null ? scaleTypeDrawable.getScaleType() : null;
-    }
     debugOverlay.setScaleType(scaleType);
 
     // fill in image origin text and color hint

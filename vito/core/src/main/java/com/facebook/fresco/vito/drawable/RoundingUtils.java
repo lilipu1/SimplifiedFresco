@@ -13,10 +13,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.NinePatchDrawable;
-import com.facebook.drawee.drawable.Rounded;
-import com.facebook.drawee.drawable.RoundedBitmapDrawable;
-import com.facebook.drawee.drawable.RoundedColorDrawable;
-import com.facebook.drawee.drawable.RoundedNinePatchDrawable;
+
 import com.facebook.fresco.vito.options.BorderOptions;
 import com.facebook.fresco.vito.options.RoundingOptions;
 import com.facebook.infer.annotation.Nullsafe;

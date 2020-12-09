@@ -13,16 +13,11 @@ import android.graphics.ColorFilter;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.drawable.Animatable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import androidx.annotation.VisibleForTesting;
 import com.facebook.common.internal.Preconditions;
 import com.facebook.drawee.drawable.DrawableParent;
-import com.facebook.drawee.drawable.FadeDrawable;
-import com.facebook.drawee.drawable.ForwardingDrawable;
-import com.facebook.drawee.drawable.MatrixDrawable;
-import com.facebook.drawee.drawable.ScaleTypeDrawable;
 import com.facebook.drawee.drawable.ScalingUtils;
 import com.facebook.drawee.interfaces.SettableDraweeHierarchy;
 import com.facebook.imagepipeline.systrace.FrescoSystrace;
@@ -92,8 +87,6 @@ public class GenericDraweeHierarchy implements SettableDraweeHierarchy {
   private @Nullable RoundingParams mRoundingParams;
 
   private final RootDrawable mTopLevelDrawable;
-  private final FadeDrawable mFadeDrawable;
-  private final ForwardingDrawable mActualImageWrapper;
 
   GenericDraweeHierarchy(GenericDraweeHierarchyBuilder builder) {
     if (FrescoSystrace.isTracing()) {
@@ -102,7 +95,6 @@ public class GenericDraweeHierarchy implements SettableDraweeHierarchy {
     mResources = builder.getResources();
     mRoundingParams = builder.getRoundingParams();
 
-    mActualImageWrapper = new ForwardingDrawable(mEmptyActualImageDrawable);
 
     int numOverlays = (builder.getOverlays() != null) ? builder.getOverlays().size() : 1;
 
@@ -120,11 +112,7 @@ public class GenericDraweeHierarchy implements SettableDraweeHierarchy {
     // array of layers
     Drawable[] layers = new Drawable[numLayers];
     layers[ACTUAL_IMAGE_INDEX] =
-        buildActualImageBranch(
-            mActualImageWrapper,
-            builder.getActualImageScaleType(),
-            builder.getActualImageFocusPoint(),
-            builder.getActualImageColorFilter());
+            mEmptyActualImageDrawable;
 
     if (numOverlays > 0) {
       int index = 0;
@@ -140,19 +128,10 @@ public class GenericDraweeHierarchy implements SettableDraweeHierarchy {
       }
     }
 
-    // fade drawable composed of layers
-    mFadeDrawable = new FadeDrawable(layers, false, ACTUAL_IMAGE_INDEX);
-    mFadeDrawable.setTransitionDuration(builder.getFadeDuration());
-
-    // rounded corners drawable (optional)
-    Drawable maybeRoundedDrawable =
-        WrappingUtils.maybeWrapWithRoundedOverlayColor(mFadeDrawable, mRoundingParams);
-
     // top-level drawable
-    mTopLevelDrawable = new RootDrawable(maybeRoundedDrawable);
+    mTopLevelDrawable = new RootDrawable(mEmptyActualImageDrawable);
     mTopLevelDrawable.mutate();
 
-    resetFade();
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.endSection();
     }
@@ -165,7 +144,6 @@ public class GenericDraweeHierarchy implements SettableDraweeHierarchy {
       @Nullable PointF focusPoint,
       @Nullable ColorFilter colorFilter) {
     drawable.setColorFilter(colorFilter);
-    drawable = WrappingUtils.maybeWrapWithScaleType(drawable, scaleType, focusPoint);
     return drawable;
   }
 
@@ -173,43 +151,11 @@ public class GenericDraweeHierarchy implements SettableDraweeHierarchy {
   @Nullable
   private Drawable buildBranch(
       @Nullable Drawable drawable, @Nullable ScalingUtils.ScaleType scaleType) {
-    drawable = WrappingUtils.maybeApplyLeafRounding(drawable, mRoundingParams, mResources);
-    drawable = WrappingUtils.maybeWrapWithScaleType(drawable, scaleType);
     return drawable;
   }
 
   private void resetActualImages() {
-    mActualImageWrapper.setDrawable(mEmptyActualImageDrawable);
   }
-
-  private void resetFade() {
-    if (mFadeDrawable != null) {
-      mFadeDrawable.beginBatchMode();
-      // turn on all layers (backgrounds, branches, overlays)
-      mFadeDrawable.fadeInAllLayers();
-      // turn off branches (leaving backgrounds and overlays on)
-      fadeOutBranches();
-      mFadeDrawable.finishTransitionImmediately();
-      mFadeDrawable.endBatchMode();
-    }
-  }
-
-  private void fadeOutBranches() {
-    fadeOutLayer(ACTUAL_IMAGE_INDEX);
-  }
-
-  private void fadeInLayer(int index) {
-    if (index >= 0) {
-      mFadeDrawable.fadeInLayer(index);
-    }
-  }
-
-  private void fadeOutLayer(int index) {
-    if (index >= 0) {
-      mFadeDrawable.fadeOutLayer(index);
-    }
-  }
-
 
   // SettableDraweeHierarchy interface
 
@@ -221,36 +167,20 @@ public class GenericDraweeHierarchy implements SettableDraweeHierarchy {
   @Override
   public void reset() {
     resetActualImages();
-    resetFade();
   }
 
   @Override
   public void setImage(Drawable drawable, float progress, boolean immediate) {
-    drawable = WrappingUtils.maybeApplyLeafRounding(drawable, mRoundingParams, mResources);
-    drawable.mutate();
-    mActualImageWrapper.setDrawable(drawable);
-    mFadeDrawable.beginBatchMode();
-    fadeOutBranches();
-    fadeInLayer(ACTUAL_IMAGE_INDEX);
-    if (immediate) {
-      mFadeDrawable.finishTransitionImmediately();
-    }
-    mFadeDrawable.endBatchMode();
+
   }
 
 
   @Override
   public void setFailure(Throwable throwable) {
-    mFadeDrawable.beginBatchMode();
-    fadeOutBranches();
-    mFadeDrawable.endBatchMode();
   }
 
   @Override
   public void setRetry(Throwable throwable) {
-    mFadeDrawable.beginBatchMode();
-    fadeOutBranches();
-    mFadeDrawable.endBatchMode();
   }
 
   @Override
@@ -263,150 +193,9 @@ public class GenericDraweeHierarchy implements SettableDraweeHierarchy {
     return mTopLevelDrawable.getBounds();
   }
 
-  // Helper methods for accessing layers
-
-  /**
-   * Gets the lowest parent drawable for the layer at the specified index.
-   *
-   * <p>Following drawables are considered as parents: FadeDrawable, MatrixDrawable,
-   * ScaleTypeDrawable. This is because those drawables are added automatically by the hierarchy (if
-   * specified), whereas their children are created externally by the client code. When we need to
-   * change the previously set drawable this is the parent whose child needs to be replaced.
-   */
-  private DrawableParent getParentDrawableAtIndex(int index) {
-    DrawableParent parent = mFadeDrawable.getDrawableParentForIndex(index);
-    if (parent.getDrawable() instanceof MatrixDrawable) {
-      parent = (MatrixDrawable) parent.getDrawable();
-    }
-    if (parent.getDrawable() instanceof ScaleTypeDrawable) {
-      parent = (ScaleTypeDrawable) parent.getDrawable();
-    }
-    return parent;
-  }
-
-  /**
-   * Sets the drawable at the specified index while keeping the old scale type and rounding. In case
-   * the given drawable is null, scale type gets cleared too.
-   */
-  private void setChildDrawableAtIndex(int index, @Nullable Drawable drawable) {
-    if (drawable == null) {
-      mFadeDrawable.setDrawable(index, null);
-      return;
-    }
-    drawable = WrappingUtils.maybeApplyLeafRounding(drawable, mRoundingParams, mResources);
-    getParentDrawableAtIndex(index).setDrawable(drawable);
-  }
-
-  /**
-   * Gets the ScaleTypeDrawable at the specified index. In case there is no child at the specified
-   * index, a NullPointerException is thrown. In case there is a child, but the ScaleTypeDrawable
-   * does not exist, the child will be wrapped with a new ScaleTypeDrawable.
-   */
-  private ScaleTypeDrawable getScaleTypeDrawableAtIndex(int index) {
-    DrawableParent parent = getParentDrawableAtIndex(index);
-    if (parent instanceof ScaleTypeDrawable) {
-      return (ScaleTypeDrawable) parent;
-    } else {
-      return WrappingUtils.wrapChildWithScaleType(parent, ScalingUtils.ScaleType.FIT_XY);
-    }
-  }
-
-  /** Returns whether the given layer has a scale type drawable. */
-  private boolean hasScaleTypeDrawableAtIndex(int index) {
-    DrawableParent parent = getParentDrawableAtIndex(index);
-    return (parent instanceof ScaleTypeDrawable);
-  }
-
-  // Mutability
-
-  /** Sets the fade duration. */
-  public void setFadeDuration(int durationMs) {
-    mFadeDrawable.setTransitionDuration(durationMs);
-  }
-
-  /** Gets the fade duration. */
-  public int getFadeDuration() {
-    return mFadeDrawable.getTransitionDuration();
-  }
-
-  /** Sets the actual image focus point. */
-  public void setActualImageFocusPoint(PointF focusPoint) {
-    Preconditions.checkNotNull(focusPoint);
-    getScaleTypeDrawableAtIndex(ACTUAL_IMAGE_INDEX).setFocusPoint(focusPoint);
-  }
-
-  /** Sets the actual image scale type. */
-  public void setActualImageScaleType(ScalingUtils.ScaleType scaleType) {
-    Preconditions.checkNotNull(scaleType);
-    getScaleTypeDrawableAtIndex(ACTUAL_IMAGE_INDEX).setScaleType(scaleType);
-  }
-
-  public @Nullable ScalingUtils.ScaleType getActualImageScaleType() {
-    if (!hasScaleTypeDrawableAtIndex(ACTUAL_IMAGE_INDEX)) {
-      return null;
-    }
-    return getScaleTypeDrawableAtIndex(ACTUAL_IMAGE_INDEX).getScaleType();
-  }
-
-  public @Nullable PointF getActualImageFocusPoint() {
-    if (!hasScaleTypeDrawableAtIndex(ACTUAL_IMAGE_INDEX)) {
-      return null;
-    }
-    return getScaleTypeDrawableAtIndex(ACTUAL_IMAGE_INDEX).getFocusPoint();
-  }
-
-  /** Sets the color filter to be applied on the actual image. */
-  public void setActualImageColorFilter(ColorFilter colorfilter) {
-    mActualImageWrapper.setColorFilter(colorfilter);
-  }
-
-  /** Gets the non-cropped post-scaling bounds of the actual image. */
-  public void getActualImageBounds(RectF outBounds) {
-    mActualImageWrapper.getTransformedBounds(outBounds);
-  }
-
-
-  /**
-   * Sets a new overlay image at the specified index.
-   *
-   * <p>This method will throw if the given index is out of bounds.
-   *
-   * @param drawable background image
-   */
-  public void setOverlayImage(int index, @Nullable Drawable drawable) {
-    // Note that overlays are by definition top-most and therefore the last elements in the array.
-    Preconditions.checkArgument(
-        index >= 0 && OVERLAY_IMAGES_INDEX + index < mFadeDrawable.getNumberOfLayers(),
-        "The given index does not correspond to an overlay image.");
-    setChildDrawableAtIndex(OVERLAY_IMAGES_INDEX + index, drawable);
-  }
-
-  /** Sets the overlay image if allowed. */
-  public void setOverlayImage(@Nullable Drawable drawable) {
-    setOverlayImage(0, drawable);
-  }
-
-  /** Sets the rounding params. */
-  public void setRoundingParams(@Nullable RoundingParams roundingParams) {
-    mRoundingParams = roundingParams;
-    WrappingUtils.updateOverlayColorRounding(mTopLevelDrawable, mRoundingParams);
-    for (int i = 0; i < mFadeDrawable.getNumberOfLayers(); i++) {
-      WrappingUtils.updateLeafRounding(getParentDrawableAtIndex(i), mRoundingParams, mResources);
-    }
-  }
-
-  /** Gets the rounding params. */
-  @Nullable
-  public RoundingParams getRoundingParams() {
-    return mRoundingParams;
-  }
-
   @VisibleForTesting
   public boolean hasImage() {
-    return mActualImageWrapper.getDrawable() != mEmptyActualImageDrawable;
+    return true;
   }
 
-  public void setOnFadeListener(FadeDrawable.OnFadeListener onFadeFinished) {
-    mFadeDrawable.setOnFadeListener(onFadeFinished);
-  }
 }

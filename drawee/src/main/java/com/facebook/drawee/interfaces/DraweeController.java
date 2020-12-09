@@ -21,12 +21,6 @@ import javax.annotation.concurrent.ThreadSafe;
 @ThreadSafe
 public interface DraweeController {
 
-  /** Gets the hierarchy. */
-  @Nullable
-  DraweeHierarchy getHierarchy();
-
-  /** Sets a new hierarchy. */
-  void setHierarchy(@Nullable DraweeHierarchy hierarchy);
 
   /**
    * Called when the view containing the hierarchy is attached to a window (either temporarily or

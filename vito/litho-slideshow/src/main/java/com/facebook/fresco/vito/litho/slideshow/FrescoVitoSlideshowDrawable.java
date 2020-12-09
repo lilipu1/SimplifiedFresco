@@ -9,7 +9,6 @@ package com.facebook.fresco.vito.litho.slideshow;
 
 import android.graphics.drawable.Drawable;
 import com.facebook.common.internal.Preconditions;
-import com.facebook.drawee.drawable.FadeDrawable;
 import com.facebook.fresco.vito.core.FrescoDrawable2;
 import com.facebook.infer.annotation.Nullsafe;
 import java.util.TimerTask;

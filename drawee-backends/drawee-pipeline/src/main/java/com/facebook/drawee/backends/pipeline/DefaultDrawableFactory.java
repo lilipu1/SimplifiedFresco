@@ -11,7 +11,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.ExifInterface;
-import com.facebook.drawee.drawable.OrientedDrawable;
+
 import com.facebook.imagepipeline.drawable.DrawableFactory;
 import com.facebook.imagepipeline.image.CloseableImage;
 import com.facebook.imagepipeline.image.CloseableStaticBitmap;
@@ -48,16 +48,7 @@ public class DefaultDrawableFactory implements DrawableFactory {
         CloseableStaticBitmap closeableStaticBitmap = (CloseableStaticBitmap) closeableImage;
         Drawable bitmapDrawable =
             new BitmapDrawable(mResources, closeableStaticBitmap.getUnderlyingBitmap());
-        if (!hasTransformableRotationAngle(closeableStaticBitmap)
-            && !hasTransformableExifOrientation(closeableStaticBitmap)) {
-          // Return the bitmap drawable directly as there's nothing to transform in it
           return bitmapDrawable;
-        } else {
-          return new OrientedDrawable(
-              bitmapDrawable,
-              closeableStaticBitmap.getRotationAngle(),
-              closeableStaticBitmap.getExifOrientation());
-        }
       } else if (mAnimatedDrawableFactory != null
           && mAnimatedDrawableFactory.supportsImageType(closeableImage)) {
         return mAnimatedDrawableFactory.createDrawable(closeableImage);

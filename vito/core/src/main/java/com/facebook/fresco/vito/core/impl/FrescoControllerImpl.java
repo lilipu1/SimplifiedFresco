@@ -21,7 +21,6 @@ import com.facebook.common.util.UriUtil;
 import com.facebook.datasource.DataSource;
 import com.facebook.drawee.backends.pipeline.info.ImageOrigin;
 import com.facebook.drawee.components.DeferredReleaser;
-import com.facebook.drawee.drawable.InstrumentedDrawable;
 import com.facebook.fresco.middleware.MiddlewareUtils;
 import com.facebook.fresco.ui.common.ControllerListener2;
 import com.facebook.fresco.ui.common.ControllerListener2.Extras;

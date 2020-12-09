@@ -14,7 +14,6 @@ import android.view.View;
 import androidx.core.util.ObjectsCompat;
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import com.facebook.datasource.DataSource;
-import com.facebook.drawee.drawable.FadeDrawable;
 import com.facebook.fresco.vito.core.FrescoDrawable2;
 import com.facebook.fresco.vito.core.PrefetchConfig;
 import com.facebook.fresco.vito.core.PrefetchTarget;

@@ -19,6 +19,7 @@ import com.facebook.datasource.IncreasingQualityDataSourceSupplier;
 import com.facebook.drawee.gestures.GestureDetector;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.interfaces.SimpleDraweeControllerBuilder;
+import com.facebook.drawee.view.DraweeView;
 import com.facebook.fresco.ui.common.ControllerListener2;
 import com.facebook.fresco.ui.common.LoggingListener;
 import com.facebook.imagepipeline.systrace.FrescoSystrace;
@@ -58,6 +59,7 @@ public abstract class AbstractDraweeControllerBuilder<
   // builder parameters
   private @Nullable Object mCallerContext;
   private @Nullable REQUEST mImageRequest;
+  private @Nullable DraweeView imageView;
   private @Nullable REQUEST mLowResImageRequest;
   private @Nullable REQUEST[] mMultiImageRequests;
   private boolean mTryCacheOnlyFirst;
@@ -123,6 +125,16 @@ public abstract class AbstractDraweeControllerBuilder<
   public BUILDER setImageRequest(@Nullable REQUEST imageRequest) {
     mImageRequest = imageRequest;
     return getThis();
+  }
+
+  public BUILDER setImageView(DraweeView draweeView){
+    imageView = draweeView;
+    return getThis();
+  }
+
+  @Nullable
+  public DraweeView getImageView() {
+    return imageView;
   }
 
   /** Gets the image request. */
@@ -333,6 +345,7 @@ public abstract class AbstractDraweeControllerBuilder<
     AbstractDraweeController controller = obtainController();
     controller.setRetainImageOnFailure(getRetainImageOnFailure());
     controller.setContentDescription(getContentDescription());
+    controller.setImageView(getImageView());
     controller.setControllerViewportVisibilityListener(getControllerViewportVisibilityListener());
     maybeBuildAndSetRetryManager(controller);
     maybeAttachListeners(controller);

@@ -9,9 +9,14 @@ package com.facebook.drawee.generic;
 
 import android.annotation.SuppressLint;
 import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.PixelFormat;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
-import com.facebook.drawee.drawable.ForwardingDrawable;
+
 import com.facebook.drawee.drawable.VisibilityAwareDrawable;
 import com.facebook.drawee.drawable.VisibilityCallback;
 import com.facebook.infer.annotation.Nullsafe;
@@ -38,14 +43,13 @@ import javax.annotation.Nullable;
  * </ul>
  */
 @Nullsafe(Nullsafe.Mode.STRICT)
-public class RootDrawable extends ForwardingDrawable implements VisibilityAwareDrawable {
+public class RootDrawable extends Drawable implements VisibilityAwareDrawable {
 
   @VisibleForTesting @Nullable Drawable mControllerOverlay = null;
 
   @Nullable private VisibilityCallback mVisibilityCallback;
 
   public RootDrawable(Drawable drawable) {
-    super(drawable);
   }
 
   @Override
@@ -80,11 +84,29 @@ public class RootDrawable extends ForwardingDrawable implements VisibilityAwareD
     if (mVisibilityCallback != null) {
       mVisibilityCallback.onDraw();
     }
-    super.draw(canvas);
     if (mControllerOverlay != null) {
       mControllerOverlay.setBounds(getBounds());
       mControllerOverlay.draw(canvas);
     }
+  }
+
+  @Override
+  public int getOpacity() {
+    return PixelFormat.TRANSLUCENT;
+  }
+
+  @Override
+  public void setColorFilter(int color, @NonNull PorterDuff.Mode mode) {
+
+  }
+
+  @Override
+  public void setColorFilter(@androidx.annotation.Nullable ColorFilter colorFilter) {
+
+  }
+
+  @Override
+  public void setAlpha(int alpha) {
   }
 
   public void setControllerOverlay(@Nullable Drawable controllerOverlay) {

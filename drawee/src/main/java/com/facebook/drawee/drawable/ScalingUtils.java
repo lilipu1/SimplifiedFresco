@@ -124,29 +124,7 @@ public class ScalingUtils {
         float focusY);
   }
 
-  @Nullable
-  public static ScaleTypeDrawable getActiveScaleTypeDrawable(@Nullable Drawable drawable) {
-    if (drawable == null) {
-      return null;
-    } else if (drawable instanceof ScaleTypeDrawable) {
-      return (ScaleTypeDrawable) drawable;
-    } else if (drawable instanceof DrawableParent) {
-      final Drawable childDrawable = ((DrawableParent) drawable).getDrawable();
-      return getActiveScaleTypeDrawable(childDrawable);
-    } else if (drawable instanceof ArrayDrawable) {
-      final ArrayDrawable fadeDrawable = (ArrayDrawable) drawable;
-      final int numLayers = fadeDrawable.getNumberOfLayers();
 
-      for (int i = 0; i < numLayers; i++) {
-        final Drawable childDrawable = fadeDrawable.getDrawable(i);
-        final ScaleTypeDrawable result = getActiveScaleTypeDrawable(childDrawable);
-        if (result != null) {
-          return result;
-        }
-      }
-    }
-    return null;
-  }
 
   /** A convenience base class that has some common logic. */
   public abstract static class AbstractScaleType implements ScaleType {

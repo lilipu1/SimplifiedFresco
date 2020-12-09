@@ -16,7 +16,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
-import com.facebook.drawee.drawable.RoundedBitmapDrawable;
+
 import com.facebook.fresco.vito.core.FrescoExperiments;
 import com.facebook.fresco.vito.options.ImageOptions;
 import com.facebook.fresco.vito.options.ImageOptionsDrawableFactory;

@@ -17,7 +17,6 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.backends.pipeline.info.ImagePerfData
 import com.facebook.drawee.backends.pipeline.info.ImagePerfDataListener
 import com.facebook.drawee.backends.pipeline.info.ImagePerfUtils
-import com.facebook.drawee.drawable.ProgressBarDrawable
 import com.facebook.drawee.drawable.ScalingUtils
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder
 import com.facebook.drawee.view.SimpleDraweeView
@@ -81,10 +80,6 @@ class ImageAdapter(
     val context = parent.context
     val hierarchy =
         GenericDraweeHierarchyBuilder(context.resources)
-            .setPlaceholderImage(placeholderDrawable)
-            .setFailureImage(failureDrawable)
-            .setProgressBarImage(ProgressBarDrawable())
-            .setActualImageScaleType(ScalingUtils.ScaleType.CENTER_CROP)
             .build()
     return ImageHolder(SimpleDraweeView(context, hierarchy), imageResizeOptions)
   }

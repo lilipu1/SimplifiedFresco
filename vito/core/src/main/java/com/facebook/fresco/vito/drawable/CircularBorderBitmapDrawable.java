@@ -14,7 +14,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import androidx.annotation.Nullable;
-import com.facebook.drawee.drawable.DrawableUtils;
+
 import com.facebook.fresco.vito.options.BorderOptions;
 import com.facebook.infer.annotation.Nullsafe;
 
