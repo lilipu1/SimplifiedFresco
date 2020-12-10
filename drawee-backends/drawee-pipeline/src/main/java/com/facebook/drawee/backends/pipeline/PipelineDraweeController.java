@@ -32,8 +32,6 @@ import com.facebook.drawee.backends.pipeline.info.ImagePerfMonitor;
 import com.facebook.drawee.components.DeferredReleaser;
 import com.facebook.drawee.controller.AbstractDraweeController;
 import com.facebook.drawee.controller.AbstractDraweeControllerBuilder;
-import com.facebook.drawee.debug.DebugControllerOverlayDrawable;
-import com.facebook.drawee.debug.listener.ImageLoadingTimeControllerListener;
 import com.facebook.drawee.drawable.ScalingUtils.ScaleType;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.interfaces.SettableDraweeHierarchy;
@@ -135,7 +133,7 @@ public class PipelineDraweeController
     mCacheKey = cacheKey;
     setCustomDrawableFactories(customDrawableFactories);
     clearImageOriginListeners();
-    maybeUpdateDebugOverlay(null);
+    //maybeUpdateDebugOverlay(null);
     addImageOriginListener(imageOriginListener);
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.endSection();
@@ -223,7 +221,7 @@ public class PipelineDraweeController
   private void init(Supplier<DataSource<CloseableReference<CloseableImage>>> dataSourceSupplier) {
     mDataSourceSupplier = dataSourceSupplier;
 
-    maybeUpdateDebugOverlay(null);
+    //maybeUpdateDebugOverlay(null);
   }
 
   protected Resources getResources() {
@@ -274,7 +272,7 @@ public class PipelineDraweeController
       Preconditions.checkState(CloseableReference.isValid(image));
       CloseableImage closeableImage = image.get();
 
-      maybeUpdateDebugOverlay(closeableImage);
+      //maybeUpdateDebugOverlay(closeableImage);
 
       Drawable drawable =
           maybeCreateDrawableFromFactories(mCustomDrawableFactories, closeableImage);
@@ -330,47 +328,47 @@ public class PipelineDraweeController
     }
 
     if (getControllerOverlay() == null) {
-      final DebugControllerOverlayDrawable controllerOverlay = new DebugControllerOverlayDrawable();
-      ImageLoadingTimeControllerListener overlayImageLoadListener =
-          new ImageLoadingTimeControllerListener(controllerOverlay);
-      mDebugOverlayImageOriginListener = new DebugOverlayImageOriginListener();
-      addControllerListener(overlayImageLoadListener);
-      setControllerOverlay(controllerOverlay);
+//      final DebugControllerOverlayDrawable controllerOverlay = new DebugControllerOverlayDrawable();
+//      ImageLoadingTimeControllerListener overlayImageLoadListener =
+//          new ImageLoadingTimeControllerListener(controllerOverlay);
+//      mDebugOverlayImageOriginListener = new DebugOverlayImageOriginListener();
+//      addControllerListener(overlayImageLoadListener);
+//      setControllerOverlay(controllerOverlay);
     }
 
     if (mImageOriginListener == null) {
       addImageOriginListener(mDebugOverlayImageOriginListener);
     }
 
-    if (getControllerOverlay() instanceof DebugControllerOverlayDrawable) {
-      updateDebugOverlay(image, (DebugControllerOverlayDrawable) getControllerOverlay());
-    }
+//    if (getControllerOverlay() instanceof DebugControllerOverlayDrawable) {
+//      updateDebugOverlay(image, (DebugControllerOverlayDrawable) getControllerOverlay());
+//    }
   }
 
   /**
    * updateDebugOverlay updates the debug overlay. Subclasses of {@link PipelineDraweeController}
    * can override this method (and call <code>super</code>) to provide additional debug information.
    */
-  protected void updateDebugOverlay(
-      @Nullable CloseableImage image, DebugControllerOverlayDrawable debugOverlay) {
-    debugOverlay.setControllerId(getId());
-
-    ScaleType scaleType = null;
-    debugOverlay.setScaleType(scaleType);
-
-    // fill in image origin text and color hint
-    final int origin = mDebugOverlayImageOriginListener.getImageOrigin();
-    final String originText = ImageOriginUtils.toString(origin);
-    final int originColor = DebugOverlayImageOriginColor.getImageOriginColor(origin);
-    debugOverlay.setOrigin(originText, originColor);
-
-    if (image != null) {
-      debugOverlay.setDimensions(image.getWidth(), image.getHeight());
-      debugOverlay.setImageSize(image.getSizeInBytes());
-    } else {
-      debugOverlay.reset();
-    }
-  }
+//  protected void updateDebugOverlay(
+//      @Nullable CloseableImage image, DebugControllerOverlayDrawable debugOverlay) {
+//    debugOverlay.setControllerId(getId());
+//
+//    ScaleType scaleType = null;
+//    debugOverlay.setScaleType(scaleType);
+//
+//    // fill in image origin text and color hint
+//    final int origin = mDebugOverlayImageOriginListener.getImageOrigin();
+//    final String originText = ImageOriginUtils.toString(origin);
+//    final int originColor = DebugOverlayImageOriginColor.getImageOriginColor(origin);
+//    debugOverlay.setOrigin(originText, originColor);
+//
+//    if (image != null) {
+//      debugOverlay.setDimensions(image.getWidth(), image.getHeight());
+//      debugOverlay.setImageSize(image.getSizeInBytes());
+//    } else {
+//      debugOverlay.reset();
+//    }
+//  }
 
   @Override
   protected ImageInfo getImageInfo(CloseableReference<CloseableImage> image) {
