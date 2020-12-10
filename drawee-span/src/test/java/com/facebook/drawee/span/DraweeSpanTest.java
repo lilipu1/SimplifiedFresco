@@ -13,7 +13,7 @@ import static org.mockito.Mockito.when;
 
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import com.facebook.drawee.view.DraweeHolder;
+
 import com.facebook.widget.text.span.BetterImageSpan;
 import org.junit.Before;
 import org.junit.Test;

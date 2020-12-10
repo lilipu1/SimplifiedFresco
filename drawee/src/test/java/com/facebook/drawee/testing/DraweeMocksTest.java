@@ -14,8 +14,6 @@ import static org.mockito.Mockito.*;
 import android.graphics.drawable.Drawable;
 import com.facebook.common.internal.Supplier;
 import com.facebook.drawee.drawable.DrawableTestUtils;
-import com.facebook.drawee.drawable.VisibilityAwareDrawable;
-import com.facebook.drawee.drawable.VisibilityCallback;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import org.junit.Before;

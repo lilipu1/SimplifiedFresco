@@ -14,7 +14,6 @@ import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import com.facebook.drawee.drawable.DrawableTestUtils;
 import com.facebook.drawee.interfaces.DraweeController;
-import com.facebook.drawee.interfaces.DraweeHierarchy;
 import com.facebook.drawee.testing.DraweeMocks;
 import org.junit.Before;
 import org.junit.Test;

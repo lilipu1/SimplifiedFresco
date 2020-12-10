@@ -9,20 +9,11 @@ package com.facebook.drawee.view;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
-import android.view.View;
 import android.widget.ImageView;
-import com.facebook.common.internal.Objects;
-import com.facebook.drawee.interfaces.DraweeController;
-import com.facebook.drawee.interfaces.DraweeHierarchy;
+
 import com.facebook.imagepipeline.systrace.FrescoSystrace;
-import javax.annotation.Nullable;
 
 /**
  * View that displays a {@link DraweeHierarchy}.

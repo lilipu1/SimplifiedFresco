@@ -41,13 +41,6 @@ public interface DraweeController {
   void onViewportVisibilityHint(boolean isVisibleInViewportHint);
 
   /**
-   * Called when the view containing the hierarchy receives a touch event.
-   *
-   * @return true if the event was handled by the controller, false otherwise
-   */
-  boolean onTouchEvent(MotionEvent event);
-
-  /**
    * For an animated image, returns an Animatable that lets clients control the animation.
    *
    * @return animatable, or null if the image is not animated or not loaded yet

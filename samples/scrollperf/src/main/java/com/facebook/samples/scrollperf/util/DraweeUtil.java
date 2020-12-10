@@ -10,7 +10,7 @@ package com.facebook.samples.scrollperf.util;
 import android.content.Context;
 import android.content.res.Resources;
 import android.view.View;
-import com.facebook.drawee.drawable.ScalingUtils;
+
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.generic.RoundingParams;

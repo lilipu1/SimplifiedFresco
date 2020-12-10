@@ -23,7 +23,6 @@ import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
 import com.facebook.drawee.drawable.DrawableTestUtils;
 import com.facebook.drawee.interfaces.DraweeController;
-import com.facebook.drawee.interfaces.DraweeHierarchy;
 import com.facebook.drawee.testing.DraweeMocks;
 import org.junit.Before;
 import org.junit.Test;

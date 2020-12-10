@@ -10,7 +10,6 @@ package com.facebook.fresco.vito.options;
 import android.graphics.Bitmap;
 import android.graphics.PointF;
 import com.facebook.common.internal.Objects;
-import com.facebook.drawee.drawable.ScalingUtils;
 import com.facebook.imagepipeline.common.ImageDecodeOptions;
 import com.facebook.imagepipeline.common.ResizeOptions;
 import com.facebook.imagepipeline.common.RotationOptions;

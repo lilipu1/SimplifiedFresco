@@ -10,7 +10,6 @@ package com.facebook.fresco.vito.core;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import com.facebook.common.internal.Objects;
-import com.facebook.drawee.drawable.ScalingUtils;
 import com.facebook.imagepipeline.common.ImageDecodeOptions;
 import com.facebook.infer.annotation.Nullsafe;
 import javax.annotation.Nullable;

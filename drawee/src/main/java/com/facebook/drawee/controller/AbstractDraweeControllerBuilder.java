@@ -16,7 +16,6 @@ import com.facebook.datasource.DataSource;
 import com.facebook.datasource.DataSources;
 import com.facebook.datasource.FirstAvailableDataSourceSupplier;
 import com.facebook.datasource.IncreasingQualityDataSourceSupplier;
-import com.facebook.drawee.gestures.GestureDetector;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.interfaces.SimpleDraweeControllerBuilder;
 import com.facebook.drawee.view.DraweeView;
@@ -466,17 +465,6 @@ public abstract class AbstractDraweeControllerBuilder<
   protected void maybeBuildAndSetRetryManager(AbstractDraweeController controller) {
     if (!mTapToRetryEnabled) {
       return;
-    }
-    controller.getRetryManager().setTapToRetryEnabled(mTapToRetryEnabled);
-    maybeBuildAndSetGestureDetector(controller);
-  }
-
-  /** Installs a gesture detector to the given controller. */
-  protected void maybeBuildAndSetGestureDetector(AbstractDraweeController controller) {
-    GestureDetector gestureDetector = controller.getGestureDetector();
-    if (gestureDetector == null) {
-      gestureDetector = GestureDetector.newInstance(mContext);
-      controller.setGestureDetector(gestureDetector);
     }
   }
 

@@ -11,9 +11,6 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
-import com.facebook.drawee.generic.GenericDraweeHierarchy;
-import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
-import com.facebook.drawee.generic.GenericDraweeHierarchyInflater;
 import com.facebook.imagepipeline.systrace.FrescoSystrace;
 import com.facebook.infer.annotation.Nullsafe;
 import javax.annotation.Nullable;
@@ -27,9 +24,6 @@ import javax.annotation.Nullable;
 @Nullsafe(Nullsafe.Mode.LOCAL)
 public class GenericDraweeView extends DraweeView {
 
-  public GenericDraweeView(Context context, GenericDraweeHierarchy hierarchy) {
-    super(context);
-  }
 
   public GenericDraweeView(Context context) {
     super(context);
@@ -56,8 +50,6 @@ public class GenericDraweeView extends DraweeView {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("GenericDraweeView#inflateHierarchy");
     }
-    GenericDraweeHierarchyBuilder builder =
-        GenericDraweeHierarchyInflater.inflateBuilder(context, attrs);
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.endSection();
     }

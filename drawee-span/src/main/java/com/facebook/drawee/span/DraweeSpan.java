@@ -8,7 +8,7 @@
 package com.facebook.drawee.span;
 
 import android.view.View;
-import com.facebook.drawee.view.DraweeHolder;
+
 import com.facebook.widget.text.span.BetterImageSpan;
 
 /**

@@ -20,8 +20,6 @@ import com.facebook.common.lifecycle.AttachDetachListener;
 import com.facebook.drawee.controller.AbstractDraweeController;
 import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.drawee.interfaces.DraweeController;
-import com.facebook.drawee.interfaces.DraweeHierarchy;
-import com.facebook.drawee.view.DraweeHolder;
 import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.widget.text.span.BetterImageSpan;
 import java.util.HashSet;

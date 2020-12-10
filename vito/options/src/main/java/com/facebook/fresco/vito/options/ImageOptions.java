@@ -12,7 +12,6 @@ import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import androidx.annotation.DrawableRes;
 import com.facebook.common.internal.Objects;
-import com.facebook.drawee.drawable.ScalingUtils;
 import com.facebook.imagepipeline.common.Priority;
 import com.facebook.infer.annotation.Nullsafe;
 import javax.annotation.Nullable;

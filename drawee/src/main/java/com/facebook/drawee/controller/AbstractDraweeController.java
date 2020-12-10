@@ -14,7 +14,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.view.MotionEvent;
+
 import com.facebook.common.internal.ImmutableMap;
 import com.facebook.common.internal.Objects;
 import com.facebook.common.internal.Preconditions;
@@ -24,11 +24,7 @@ import com.facebook.datasource.DataSource;
 import com.facebook.datasource.DataSubscriber;
 import com.facebook.drawee.components.DeferredReleaser;
 import com.facebook.drawee.components.DraweeEventTracker;
-import com.facebook.drawee.components.RetryManager;
-import com.facebook.drawee.generic.GenericDraweeHierarchy;
-import com.facebook.drawee.gestures.GestureDetector;
 import com.facebook.drawee.interfaces.DraweeController;
-import com.facebook.drawee.interfaces.SettableDraweeHierarchy;
 import com.facebook.drawee.view.DraweeView;
 import com.facebook.fresco.middleware.MiddlewareUtils;
 import com.facebook.fresco.ui.common.ControllerListener2;
@@ -52,7 +48,7 @@ import javax.annotation.concurrent.NotThreadSafe;
  */
 @NotThreadSafe
 public abstract class AbstractDraweeController<T, INFO>
-    implements DraweeController, DeferredReleaser.Releasable, GestureDetector.ClickListener {
+    implements DraweeController, DeferredReleaser.Releasable {
 
   private static final Map<String, Object> COMPONENT_EXTRAS =
       ImmutableMap.<String, Object>of("component_tag", "drawee");
@@ -89,8 +85,6 @@ public abstract class AbstractDraweeController<T, INFO>
   private final Executor mUiThreadImmediateExecutor;
 
   // Optional components
-  private @Nullable RetryManager mRetryManager;
-  private @Nullable GestureDetector mGestureDetector;
   private @Nullable ControllerViewportVisibilityListener mControllerViewportVisibilityListener;
   protected @Nullable ControllerListener<INFO> mControllerListener;
   protected ForwardingControllerListener2<INFO> mControllerListener2 =
@@ -98,7 +92,6 @@ public abstract class AbstractDraweeController<T, INFO>
   private DraweeView imageView;
 
   // Hierarchy
-  private @Nullable SettableDraweeHierarchy mSettableDraweeHierarchy;
   private @Nullable Drawable mControllerOverlay;
 
   // Constant state (non-final because controllers can be reused)
@@ -164,25 +157,12 @@ public abstract class AbstractDraweeController<T, INFO>
     releaseFetch();
     mRetainImageOnFailure = false;
     // reinitialize optional components
-    if (mRetryManager != null) {
-      mRetryManager.init();
-    }
-    if (mGestureDetector != null) {
-      mGestureDetector.init();
-      mGestureDetector.setClickListener(this);
-    }
     if (mControllerListener instanceof InternalForwardingListener) {
       ((InternalForwardingListener) mControllerListener).clearListeners();
     } else {
       mControllerListener = null;
     }
     mControllerViewportVisibilityListener = null;
-    // clear hierarchy and controller overlay
-    if (mSettableDraweeHierarchy != null) {
-      mSettableDraweeHierarchy.reset();
-      mSettableDraweeHierarchy.setControllerOverlay(null);
-      mSettableDraweeHierarchy = null;
-    }
     mControllerOverlay = null;
     // reinitialize constant state
     if (FLog.isLoggable(FLog.VERBOSE)) {
@@ -199,15 +179,6 @@ public abstract class AbstractDraweeController<T, INFO>
   @Override
   public void release() {
     mEventTracker.recordEvent(Event.ON_RELEASE_CONTROLLER);
-    if (mRetryManager != null) {
-      mRetryManager.reset();
-    }
-    if (mGestureDetector != null) {
-      mGestureDetector.reset();
-    }
-    if (mSettableDraweeHierarchy != null) {
-      mSettableDraweeHierarchy.reset();
-    }
     releaseFetch();
   }
 
@@ -249,27 +220,7 @@ public abstract class AbstractDraweeController<T, INFO>
     return mCallerContext;
   }
 
-  /** Gets retry manager. */
-  @ReturnsOwnership
-  protected RetryManager getRetryManager() {
-    if (mRetryManager == null) {
-      mRetryManager = new RetryManager();
-    }
-    return mRetryManager;
-  }
 
-  /** Gets gesture detector. */
-  protected @Nullable GestureDetector getGestureDetector() {
-    return mGestureDetector;
-  }
-
-  /** Sets gesture detector. */
-  protected void setGestureDetector(@Nullable GestureDetector gestureDetector) {
-    mGestureDetector = gestureDetector;
-    if (mGestureDetector != null) {
-      mGestureDetector.setClickListener(this);
-    }
-  }
 
   /** Sets whether to display last available image in case of failure. */
   protected void setRetainImageOnFailure(boolean enabled) {
@@ -347,9 +298,6 @@ public abstract class AbstractDraweeController<T, INFO>
   /** Sets the controller overlay */
   protected void setControllerOverlay(@Nullable Drawable controllerOverlay) {
     mControllerOverlay = controllerOverlay;
-    if (mSettableDraweeHierarchy != null) {
-      mSettableDraweeHierarchy.setControllerOverlay(mControllerOverlay);
-    }
   }
 
   /** Gets the controller overlay */
@@ -410,45 +358,11 @@ public abstract class AbstractDraweeController<T, INFO>
     mIsVisibleInViewportHint = isVisibleInViewportHint;
   }
 
-  @Override
-  public boolean onTouchEvent(MotionEvent event) {
-    if (FLog.isLoggable(FLog.VERBOSE)) {
-      FLog.v(TAG, "controller %x %s: onTouchEvent %s", System.identityHashCode(this), mId, event);
-    }
-    if (mGestureDetector == null) {
-      return false;
-    }
-    if (mGestureDetector.isCapturingGesture() || shouldHandleGesture()) {
-      mGestureDetector.onTouchEvent(event);
-      return true;
-    }
-    return false;
-  }
-
   /** Returns whether the gesture should be handled by the controller */
   protected boolean shouldHandleGesture() {
-    return shouldRetryOnTap();
-  }
-
-  private boolean shouldRetryOnTap() {
-    // We should only handle touch event if we are expecting some gesture.
-    // For example, we expect click when fetch fails and tap-to-retry is enabled.
-    return mHasFetchFailed && mRetryManager != null && mRetryManager.shouldRetryOnTap();
-  }
-
-  @Override
-  public boolean onClick() {
-    if (FLog.isLoggable(FLog.VERBOSE)) {
-      FLog.v(TAG, "controller %x %s: onClick", System.identityHashCode(this), mId);
-    }
-    if (shouldRetryOnTap()) {
-      mRetryManager.notifyTapToRetry();
-      mSettableDraweeHierarchy.reset();
-      submitRequest();
-      return true;
-    }
     return false;
   }
+
 
   protected void submitRequest() {
     if (FrescoSystrace.isTracing()) {
@@ -616,13 +530,6 @@ public abstract class AbstractDraweeController<T, INFO>
       mDataSource = null;
       mHasFetchFailed = true;
       // Set the previously available image if available.
-      if (mRetainImageOnFailure && mDrawable != null) {
-        mSettableDraweeHierarchy.setImage(mDrawable, 1f, true);
-      } else if (shouldRetryOnTap()) {
-        mSettableDraweeHierarchy.setRetry(throwable);
-      } else {
-        mSettableDraweeHierarchy.setFailure(throwable);
-      }
       reportFailure(throwable, dataSource);
       // IMPORTANT: do not execute any instance-specific code after this point
     } else {
@@ -754,11 +661,7 @@ public abstract class AbstractDraweeController<T, INFO>
       @Nullable Uri mainUri) {
     String scaleType = null;
     PointF focusPoint = null;
-    if (mSettableDraweeHierarchy instanceof GenericDraweeHierarchy) {
-      scaleType = "";
 
-      focusPoint = null;
-    }
     return MiddlewareUtils.obtainExtras(
         COMPONENT_EXTRAS,
         SHORTCUT_EXTRAS,
@@ -782,10 +685,7 @@ public abstract class AbstractDraweeController<T, INFO>
   }
 
   private @Nullable Rect getDimensions() {
-    if (mSettableDraweeHierarchy == null) {
-      return null;
-    }
-    return mSettableDraweeHierarchy.getBounds();
+    return new Rect();
   }
 
   public abstract @Nullable Map<String, Object> obtainExtrasFromImage(INFO info);

@@ -7,7 +7,6 @@
 
 package com.facebook.drawee.backends.pipeline.info;
 
-import android.graphics.Rect;
 import com.facebook.common.internal.Supplier;
 import com.facebook.common.internal.Suppliers;
 import com.facebook.common.references.CloseableReference;
@@ -18,7 +17,6 @@ import com.facebook.drawee.backends.pipeline.info.internal.ImagePerfControllerLi
 import com.facebook.drawee.backends.pipeline.info.internal.ImagePerfImageOriginListener;
 import com.facebook.drawee.backends.pipeline.info.internal.ImagePerfRequestListener;
 import com.facebook.drawee.controller.AbstractDraweeControllerBuilder;
-import com.facebook.drawee.interfaces.DraweeHierarchy;
 import com.facebook.imagepipeline.image.CloseableImage;
 import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.listener.ForwardingRequestListener;

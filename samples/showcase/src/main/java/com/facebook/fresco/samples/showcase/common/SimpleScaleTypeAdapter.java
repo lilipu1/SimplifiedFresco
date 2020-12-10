@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
-import com.facebook.drawee.drawable.ScalingUtils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;

@@ -9,22 +9,14 @@ package com.facebook.drawee.view;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Build;
 import android.util.AttributeSet;
 
-import androidx.annotation.DrawableRes;
-
 import com.facebook.common.internal.Preconditions;
 import com.facebook.common.internal.Supplier;
-import com.facebook.common.util.UriUtil;
-import com.facebook.drawee.R;
 import com.facebook.drawee.controller.AbstractDraweeControllerBuilder;
-import com.facebook.drawee.drawable.VisibilityAwareDrawable;
-import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.interfaces.DraweeController;
-import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.systrace.FrescoSystrace;
 
 import javax.annotation.Nullable;
@@ -57,10 +49,6 @@ public class SimpleDraweeView extends GenericDraweeView {
 
     private AbstractDraweeControllerBuilder mControllerBuilder;
 
-    public SimpleDraweeView(Context context, GenericDraweeHierarchy hierarchy) {
-        super(context, hierarchy);
-        init(context, null);
-    }
 
     public SimpleDraweeView(Context context) {
         super(context);

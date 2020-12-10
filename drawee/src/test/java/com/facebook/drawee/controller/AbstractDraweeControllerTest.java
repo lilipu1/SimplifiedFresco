@@ -36,7 +36,7 @@ import com.facebook.datasource.DataSource;
 import com.facebook.datasource.SimpleDataSource;
 import com.facebook.drawee.components.DeferredReleaser;
 import com.facebook.drawee.interfaces.DraweeController;
-import com.facebook.drawee.interfaces.SettableDraweeHierarchy;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

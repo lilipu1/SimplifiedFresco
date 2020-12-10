@@ -9,8 +9,6 @@ package com.facebook.drawee.debug;
 
 import static org.junit.Assert.assertEquals;
 
-import com.facebook.drawee.drawable.ScalingUtils;
-
 public class DebugControllerOverlayDrawableTestHelper {
 
   public DebugControllerOverlayDrawable mOverlayDrawable;

@@ -18,7 +18,7 @@ import com.facebook.drawee.drawable.DrawableTestUtils;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.interfaces.DraweeController;
-import com.facebook.drawee.interfaces.DraweeHierarchy;
+
 import java.util.concurrent.atomic.AtomicInteger;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
