@@ -83,7 +83,6 @@ public class GenericDraweeHierarchy implements SettableDraweeHierarchy {
 
   private final Drawable mEmptyActualImageDrawable = new ColorDrawable(Color.TRANSPARENT);
 
-  private final Resources mResources;
   private @Nullable RoundingParams mRoundingParams;
 
   private final RootDrawable mTopLevelDrawable;
@@ -92,7 +91,6 @@ public class GenericDraweeHierarchy implements SettableDraweeHierarchy {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("GenericDraweeHierarchy()");
     }
-    mResources = builder.getResources();
     mRoundingParams = builder.getRoundingParams();
 
 

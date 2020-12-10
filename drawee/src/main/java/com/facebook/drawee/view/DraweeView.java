@@ -39,9 +39,8 @@ import javax.annotation.Nullable;
  * class is likely to be converted to extend View directly in the future, so avoid using ImageView's
  * methods and properties.
  */
-public class DraweeView<DH extends DraweeHierarchy> extends ImageView {
+public class DraweeView extends ImageView {
 
-  private DraweeHolder<DH> mDraweeHolder;
   private boolean mInitialised = false;
 
 
@@ -76,7 +75,6 @@ public class DraweeView<DH extends DraweeHierarchy> extends ImageView {
         return;
       }
       mInitialised = true;
-      mDraweeHolder = DraweeHolder.create(null, context);
     } finally {
       if (FrescoSystrace.isTracing()) {
         FrescoSystrace.endSection();
@@ -84,49 +82,4 @@ public class DraweeView<DH extends DraweeHierarchy> extends ImageView {
     }
   }
 
-  /** Sets the hierarchy. */
-  public void setHierarchy(DH hierarchy) {
-    mDraweeHolder.setHierarchy(hierarchy);
-    super.setImageDrawable(mDraweeHolder.getTopLevelDrawable());
-  }
-
-  /** Gets the hierarchy if set, throws NPE otherwise. */
-  public DH getHierarchy() {
-    return mDraweeHolder.getHierarchy();
-  }
-
-  /** Returns whether the hierarchy is set or not. */
-  public boolean hasHierarchy() {
-    return mDraweeHolder.hasHierarchy();
-  }
-
-  /** Gets the top-level drawable if hierarchy is set, null otherwise. */
-  @Nullable
-  public Drawable getTopLevelDrawable() {
-    return mDraweeHolder.getTopLevelDrawable();
-  }
-
-  /** Sets the controller. */
-  public void setController(@Nullable DraweeController draweeController) {
-    mDraweeHolder.setController(draweeController);
-    super.setImageDrawable(mDraweeHolder.getTopLevelDrawable());
-  }
-
-  /** Gets the controller if set, null otherwise. */
-  @Nullable
-  public DraweeController getController() {
-    return mDraweeHolder.getController();
-  }
-
-  /** Returns whether the controller is set or not. */
-  public boolean hasController() {
-    return mDraweeHolder.getController() != null;
-  }
-
-  @Override
-  public String toString() {
-    return Objects.toStringHelper(this)
-        .add("holder", mDraweeHolder != null ? mDraweeHolder.toString() : "<no holder set>")
-        .toString();
-  }
 }

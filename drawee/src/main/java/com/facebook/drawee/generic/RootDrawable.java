@@ -72,9 +72,9 @@ public class RootDrawable extends Drawable implements VisibilityAwareDrawable {
     if (mVisibilityCallback != null) {
       mVisibilityCallback.onVisibilityChange(visible);
     }
-    if (mVisibilityCallback != null) {
-      mVisibilityCallback.onDraw();
-    }
+//    if (mVisibilityCallback != null) {
+//      mVisibilityCallback.onDraw();
+//    }
     return super.setVisible(visible, restart);
   }
 
@@ -84,13 +84,13 @@ public class RootDrawable extends Drawable implements VisibilityAwareDrawable {
     if (!isVisible()) {
       return;
     }
-    /*if (mVisibilityCallback != null) {
+    if (mVisibilityCallback != null) {
       mVisibilityCallback.onDraw();
     }
     if (mControllerOverlay != null) {
       mControllerOverlay.setBounds(getBounds());
       mControllerOverlay.draw(canvas);
-    }*/
+    }
   }
 
   @Override

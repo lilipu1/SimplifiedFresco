@@ -38,7 +38,6 @@ public class GenericDraweeHierarchyBuilder {
   public static final ScalingUtils.ScaleType DEFAULT_ACTUAL_IMAGE_SCALE_TYPE =
       ScalingUtils.ScaleType.CENTER_CROP;
 
-  private Resources mResources;
 
   private int mFadeDuration;
 
@@ -67,13 +66,12 @@ public class GenericDraweeHierarchyBuilder {
 
   private @Nullable RoundingParams mRoundingParams;
 
-  public GenericDraweeHierarchyBuilder(Resources resources) {
-    mResources = resources;
+  public GenericDraweeHierarchyBuilder() {
     init();
   }
 
-  public static GenericDraweeHierarchyBuilder newInstance(Resources resources) {
-    return new GenericDraweeHierarchyBuilder(resources);
+  public static GenericDraweeHierarchyBuilder newInstance() {
+    return new GenericDraweeHierarchyBuilder();
   }
 
   /** Initializes this builder to its defaults. */
@@ -114,15 +112,6 @@ public class GenericDraweeHierarchyBuilder {
   public GenericDraweeHierarchyBuilder reset() {
     init();
     return this;
-  }
-
-  /**
-   * Gets resources.
-   *
-   * @return resources
-   */
-  public Resources getResources() {
-    return mResources;
   }
 
   /**
@@ -180,7 +169,6 @@ public class GenericDraweeHierarchyBuilder {
    * @return modified instance of this builder
    */
   public GenericDraweeHierarchyBuilder setPlaceholderImage(int resourceId) {
-    mPlaceholderImage = mResources.getDrawable(resourceId);
     return this;
   }
 
@@ -231,7 +219,6 @@ public class GenericDraweeHierarchyBuilder {
    */
   public GenericDraweeHierarchyBuilder setPlaceholderImage(
       int resourceId, @Nullable ScalingUtils.ScaleType placeholderImageScaleType) {
-    mPlaceholderImage = mResources.getDrawable(resourceId);
     mPlaceholderImageScaleType = placeholderImageScaleType;
     return this;
   }
@@ -254,7 +241,6 @@ public class GenericDraweeHierarchyBuilder {
    * @return modified instance of this builder
    */
   public GenericDraweeHierarchyBuilder setRetryImage(int resourceId) {
-    mRetryImage = mResources.getDrawable(resourceId);
     return this;
   }
 
@@ -305,7 +291,6 @@ public class GenericDraweeHierarchyBuilder {
    */
   public GenericDraweeHierarchyBuilder setRetryImage(
       int resourceId, @Nullable ScalingUtils.ScaleType retryImageScaleType) {
-    mRetryImage = mResources.getDrawable(resourceId);
     mRetryImageScaleType = retryImageScaleType;
     return this;
   }
@@ -328,7 +313,6 @@ public class GenericDraweeHierarchyBuilder {
    * @return modified instance of this builder
    */
   public GenericDraweeHierarchyBuilder setFailureImage(int resourceId) {
-    mFailureImage = mResources.getDrawable(resourceId);
     return this;
   }
 
@@ -379,7 +363,6 @@ public class GenericDraweeHierarchyBuilder {
    */
   public GenericDraweeHierarchyBuilder setFailureImage(
       int resourceId, @Nullable ScalingUtils.ScaleType failureImageScaleType) {
-    mFailureImage = mResources.getDrawable(resourceId);
     mFailureImageScaleType = failureImageScaleType;
     return this;
   }
@@ -402,7 +385,6 @@ public class GenericDraweeHierarchyBuilder {
    * @return modified instance of this builder
    */
   public GenericDraweeHierarchyBuilder setProgressBarImage(int resourceId) {
-    mProgressBarImage = mResources.getDrawable(resourceId);
     return this;
   }
 
@@ -453,7 +435,6 @@ public class GenericDraweeHierarchyBuilder {
    */
   public GenericDraweeHierarchyBuilder setProgressBarImage(
       int resourceId, @Nullable ScalingUtils.ScaleType progressBarImageScaleType) {
-    mProgressBarImage = mResources.getDrawable(resourceId);
     mProgressBarImageScaleType = progressBarImageScaleType;
     return this;
   }

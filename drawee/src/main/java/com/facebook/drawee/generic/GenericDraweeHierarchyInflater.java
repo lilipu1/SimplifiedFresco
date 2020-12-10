@@ -74,8 +74,7 @@ public class GenericDraweeHierarchyInflater {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("GenericDraweeHierarchyBuilder#inflateBuilder");
     }
-    Resources resources = context.getResources();
-    GenericDraweeHierarchyBuilder builder = new GenericDraweeHierarchyBuilder(resources);
+    GenericDraweeHierarchyBuilder builder = new GenericDraweeHierarchyBuilder();
     builder = updateBuilder(builder, context, attrs);
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.endSection();
@@ -107,124 +106,6 @@ public class GenericDraweeHierarchyInflater {
     boolean roundTopEnd = true;
     boolean roundBottomStart = true;
     boolean roundBottomEnd = true;
-
-    if (attrs != null) {
-      TypedArray gdhAttrs =
-          context.obtainStyledAttributes(attrs, R.styleable.GenericDraweeHierarchy);
-      try {
-        final int indexCount = gdhAttrs.getIndexCount();
-        for (int i = 0; i < indexCount; i++) {
-          final int attr = gdhAttrs.getIndex(i);
-          // most popular ones first
-          if (attr == R.styleable.GenericDraweeHierarchy_actualImageScaleType) {
-            builder.setActualImageScaleType(getScaleTypeFromXml(gdhAttrs, attr));
-
-          } else if (attr == R.styleable.GenericDraweeHierarchy_placeholderImage) {
-            builder.setPlaceholderImage(getDrawable(context, gdhAttrs, attr));
-
-          } else if (attr == R.styleable.GenericDraweeHierarchy_pressedStateOverlayImage) {
-            builder.setPressedStateOverlay(getDrawable(context, gdhAttrs, attr));
-
-          } else if (attr == R.styleable.GenericDraweeHierarchy_progressBarImage) {
-            builder.setProgressBarImage(getDrawable(context, gdhAttrs, attr));
-
-            // the remaining ones without any particular order
-          } else if (attr == R.styleable.GenericDraweeHierarchy_fadeDuration) {
-            builder.setFadeDuration(gdhAttrs.getInt(attr, 0));
-
-          } else if (attr == R.styleable.GenericDraweeHierarchy_viewAspectRatio) {
-            builder.setDesiredAspectRatio(gdhAttrs.getFloat(attr, 0));
-
-          } else if (attr == R.styleable.GenericDraweeHierarchy_placeholderImageScaleType) {
-            builder.setPlaceholderImageScaleType(getScaleTypeFromXml(gdhAttrs, attr));
-
-          } else if (attr == R.styleable.GenericDraweeHierarchy_retryImage) {
-            builder.setRetryImage(getDrawable(context, gdhAttrs, attr));
-
-          } else if (attr == R.styleable.GenericDraweeHierarchy_retryImageScaleType) {
-            builder.setRetryImageScaleType(getScaleTypeFromXml(gdhAttrs, attr));
-
-          } else if (attr == R.styleable.GenericDraweeHierarchy_failureImage) {
-            builder.setFailureImage(getDrawable(context, gdhAttrs, attr));
-
-          } else if (attr == R.styleable.GenericDraweeHierarchy_failureImageScaleType) {
-            builder.setFailureImageScaleType(getScaleTypeFromXml(gdhAttrs, attr));
-
-          } else if (attr == R.styleable.GenericDraweeHierarchy_progressBarImageScaleType) {
-            builder.setProgressBarImageScaleType(getScaleTypeFromXml(gdhAttrs, attr));
-
-          } else if (attr == R.styleable.GenericDraweeHierarchy_progressBarAutoRotateInterval) {
-            progressBarAutoRotateInterval =
-                gdhAttrs.getInteger(attr, progressBarAutoRotateInterval);
-
-          } else if (attr == R.styleable.GenericDraweeHierarchy_backgroundImage) {
-            builder.setBackground(getDrawable(context, gdhAttrs, attr));
-
-          } else if (attr == R.styleable.GenericDraweeHierarchy_overlayImage) {
-            builder.setOverlay(getDrawable(context, gdhAttrs, attr));
-
-          } else if (attr == R.styleable.GenericDraweeHierarchy_roundAsCircle) {
-            getRoundingParams(builder).setRoundAsCircle(gdhAttrs.getBoolean(attr, false));
-
-          } else if (attr == R.styleable.GenericDraweeHierarchy_roundedCornerRadius) {
-            roundedCornerRadius = gdhAttrs.getDimensionPixelSize(attr, roundedCornerRadius);
-
-          } else if (attr == R.styleable.GenericDraweeHierarchy_roundTopLeft) {
-            roundTopLeft = gdhAttrs.getBoolean(attr, roundTopLeft);
-
-          } else if (attr == R.styleable.GenericDraweeHierarchy_roundTopRight) {
-            roundTopRight = gdhAttrs.getBoolean(attr, roundTopRight);
-
-          } else if (attr == R.styleable.GenericDraweeHierarchy_roundBottomLeft) {
-            roundBottomLeft = gdhAttrs.getBoolean(attr, roundBottomLeft);
-
-          } else if (attr == R.styleable.GenericDraweeHierarchy_roundBottomRight) {
-            roundBottomRight = gdhAttrs.getBoolean(attr, roundBottomRight);
-
-          } else if (attr == R.styleable.GenericDraweeHierarchy_roundTopStart) {
-            roundTopStart = gdhAttrs.getBoolean(attr, roundTopStart);
-
-          } else if (attr == R.styleable.GenericDraweeHierarchy_roundTopEnd) {
-            roundTopEnd = gdhAttrs.getBoolean(attr, roundTopEnd);
-
-          } else if (attr == R.styleable.GenericDraweeHierarchy_roundBottomStart) {
-            roundBottomStart = gdhAttrs.getBoolean(attr, roundBottomStart);
-
-          } else if (attr == R.styleable.GenericDraweeHierarchy_roundBottomEnd) {
-            roundBottomEnd = gdhAttrs.getBoolean(attr, roundBottomEnd);
-
-          } else if (attr == R.styleable.GenericDraweeHierarchy_roundWithOverlayColor) {
-            getRoundingParams(builder).setOverlayColor(gdhAttrs.getColor(attr, 0));
-
-          } else if (attr == R.styleable.GenericDraweeHierarchy_roundingBorderWidth) {
-            getRoundingParams(builder).setBorderWidth(gdhAttrs.getDimensionPixelSize(attr, 0));
-
-          } else if (attr == R.styleable.GenericDraweeHierarchy_roundingBorderColor) {
-            getRoundingParams(builder).setBorderColor(gdhAttrs.getColor(attr, 0));
-
-          } else if (attr == R.styleable.GenericDraweeHierarchy_roundingBorderPadding) {
-            getRoundingParams(builder).setPadding(gdhAttrs.getDimensionPixelSize(attr, 0));
-          }
-        }
-      } finally {
-        gdhAttrs.recycle();
-
-        if (android.os.Build.VERSION.SDK_INT >= 17
-            && context.getResources().getConfiguration().getLayoutDirection()
-                == View.LAYOUT_DIRECTION_RTL) {
-          roundTopLeft = roundTopLeft && roundTopEnd;
-          roundTopRight = roundTopRight && roundTopStart;
-          roundBottomRight = roundBottomRight && roundBottomStart;
-          roundBottomLeft = roundBottomLeft && roundBottomEnd;
-        } else {
-          roundTopLeft = roundTopLeft && roundTopStart;
-          roundTopRight = roundTopRight && roundTopEnd;
-          roundBottomRight = roundBottomRight && roundBottomEnd;
-          roundBottomLeft = roundBottomLeft && roundBottomStart;
-        }
-      }
-    }
-
     // wrap progress bar if auto-rotating requested
     if (builder.getProgressBarImage() != null && progressBarAutoRotateInterval > 0) {
 
@@ -251,42 +132,42 @@ public class GenericDraweeHierarchyInflater {
     return builder.getRoundingParams();
   }
 
-  @Nullable
-  private static Drawable getDrawable(Context context, TypedArray gdhAttrs, int attrId) {
-    int resourceId = gdhAttrs.getResourceId(attrId, 0);
-    return (resourceId == 0) ? null : context.getResources().getDrawable(resourceId);
-  }
+//  @Nullable
+//  private static Drawable getDrawable(Context context, TypedArray gdhAttrs, int attrId) {
+//    int resourceId = gdhAttrs.getResourceId(attrId, 0);
+//    return (resourceId == 0) ? null : context.getResources().getDrawable(resourceId);
+//  }
 
   /**
    * Returns the scale type indicated in XML, or null if the special 'none' value was found.
    * Important: these values need to be in sync with GenericDraweeHierarchy styleable attributes.
    */
-  @Nullable
-  private static ScaleType getScaleTypeFromXml(TypedArray gdhAttrs, int attrId) {
-    switch (gdhAttrs.getInt(attrId, -2)) {
-      case -1: // none
-        return null;
-      case 0: // fitXY
-        return ScaleType.FIT_XY;
-      case 1: // fitStart
-        return ScaleType.FIT_START;
-      case 2: // fitCenter
-        return ScaleType.FIT_CENTER;
-      case 3: // fitEnd
-        return ScaleType.FIT_END;
-      case 4: // center
-        return ScaleType.CENTER;
-      case 5: // centerInside
-        return ScaleType.CENTER_INSIDE;
-      case 6: // centerCrop
-        return ScaleType.CENTER_CROP;
-      case 7: // focusCrop
-        return ScaleType.FOCUS_CROP;
-      case 8: // fitBottomStart
-        return ScaleType.FIT_BOTTOM_START;
-      default:
-        // this method is supposed to be called only when XML attribute is specified.
-        throw new RuntimeException("XML attribute not specified!");
-    }
-  }
+//  @Nullable
+//  private static ScaleType getScaleTypeFromXml(TypedArray gdhAttrs, int attrId) {
+//    switch (gdhAttrs.getInt(attrId, -2)) {
+//      case -1: // none
+//        return null;
+//      case 0: // fitXY
+//        return ScaleType.FIT_XY;
+//      case 1: // fitStart
+//        return ScaleType.FIT_START;
+//      case 2: // fitCenter
+//        return ScaleType.FIT_CENTER;
+//      case 3: // fitEnd
+//        return ScaleType.FIT_END;
+//      case 4: // center
+//        return ScaleType.CENTER;
+//      case 5: // centerInside
+//        return ScaleType.CENTER_INSIDE;
+//      case 6: // centerCrop
+//        return ScaleType.CENTER_CROP;
+//      case 7: // focusCrop
+//        return ScaleType.FOCUS_CROP;
+//      case 8: // fitBottomStart
+//        return ScaleType.FIT_BOTTOM_START;
+//      default:
+//        // this method is supposed to be called only when XML attribute is specified.
+//        throw new RuntimeException("XML attribute not specified!");
+//    }
+//  }
 }

@@ -50,16 +50,7 @@ data class ImageHolder(private val view: View, private val resizeOptions: Resize
 
   fun bind(uri: Uri) {
     itemView as? SimpleDraweeView ?: return
-    itemView.controller =
-        Fresco.newDraweeControllerBuilder()
-            .setImageRequest(
-                ImageRequestBuilder.newBuilderWithSource(uri)
-                    .setResizeOptions(resizeOptions)
-                    .build())
-            .setOldController(itemView.controller)
-            .setAutoPlayAnimations(true)
-            .setPerfDataListener(logImagePerf)
-            .build()
+
   }
 }
 
@@ -79,7 +70,7 @@ class ImageAdapter(
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageHolder {
     val context = parent.context
     val hierarchy =
-        GenericDraweeHierarchyBuilder(context.resources)
+        GenericDraweeHierarchyBuilder()
             .build()
     return ImageHolder(SimpleDraweeView(context, hierarchy), imageResizeOptions)
   }

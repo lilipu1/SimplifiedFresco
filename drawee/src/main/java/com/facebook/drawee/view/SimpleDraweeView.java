@@ -33,7 +33,7 @@ import javax.annotation.Nullable;
  * This view takes a uri as input and internally builds and sets a controller.
  *
  * <p>This class must be statically initialized in order to be used. If you are using the Fresco
- * image pipeline, use {@link com.facebook.drawee.backends.pipeline.Fresco#initialize} to do this.
+ * image pipeline, use {@link com.facebook.drawee.backends.pipelinto do this.
  */
 public class SimpleDraweeView extends GenericDraweeView {
 
@@ -102,17 +102,17 @@ public class SimpleDraweeView extends GenericDraweeView {
         return mControllerBuilder;
     }
 
-    /**
-     * Sets the image request
-     *
-     * @param request Image Request
-     */
-    public void setImageRequest(ImageRequest request) {
-        AbstractDraweeControllerBuilder controllerBuilder = mControllerBuilder;
-        DraweeController controller =
-                controllerBuilder.setImageRequest(request).setOldController(getController()).build();
-        setController(controller);
-    }
+//    /**
+//     * Sets the image request
+//     *
+//     * @param request Image Request
+//     */
+//    public void setImageRequest(ImageRequest request) {
+//        AbstractDraweeControllerBuilder controllerBuilder = mControllerBuilder;
+//        DraweeController controller =
+//                controllerBuilder.setImageRequest(request).setOldController(getController()).build();
+//        setController(controller);
+//    }
 
     /**
      * Displays an image given by the uri.
@@ -146,9 +146,9 @@ public class SimpleDraweeView extends GenericDraweeView {
                         .setCallerContext(callerContext)
                         .setImageView(this)
                         .setUri(uri)
-                        .setOldController(getController())
                         .build();
-        setController(controller);
+        controller.onAttach();
+//        setController(controller);
     }
 
     /**

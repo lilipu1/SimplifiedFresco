@@ -25,11 +25,10 @@ import javax.annotation.Nullable;
  * GenericDraweeHierarchyInflater} for supported XML attributes.
  */
 @Nullsafe(Nullsafe.Mode.LOCAL)
-public class GenericDraweeView extends DraweeView<GenericDraweeHierarchy> {
+public class GenericDraweeView extends DraweeView {
 
   public GenericDraweeView(Context context, GenericDraweeHierarchy hierarchy) {
     super(context);
-    setHierarchy(hierarchy);
   }
 
   public GenericDraweeView(Context context) {
@@ -59,7 +58,6 @@ public class GenericDraweeView extends DraweeView<GenericDraweeHierarchy> {
     }
     GenericDraweeHierarchyBuilder builder =
         GenericDraweeHierarchyInflater.inflateBuilder(context, attrs);
-    setHierarchy(builder.build());
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.endSection();
     }
