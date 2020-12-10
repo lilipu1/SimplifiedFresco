@@ -10,7 +10,6 @@ package com.facebook.fresco.samples.showcase.common;
 import android.graphics.drawable.Animatable;
 import android.view.View;
 import com.facebook.drawee.interfaces.DraweeController;
-import com.facebook.drawee.view.GenericDraweeView;
 
 /**
  * Simple View click listener that toggles a DraweeView's animation if an animated image is

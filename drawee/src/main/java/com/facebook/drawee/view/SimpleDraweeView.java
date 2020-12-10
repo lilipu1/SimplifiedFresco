@@ -27,7 +27,7 @@ import javax.annotation.Nullable;
  * <p>This class must be statically initialized in order to be used. If you are using the Fresco
  * image pipeline, use {@link com.facebook.drawee.backends.pipelinto do this.
  */
-public class SimpleDraweeView extends GenericDraweeView {
+public class SimpleDraweeView extends DraweeView {
 
     private static Supplier<? extends AbstractDraweeControllerBuilder>
             sDraweecontrollerbuildersupplier;
