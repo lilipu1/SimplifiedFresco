@@ -17,7 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 import com.facebook.common.webp.WebpSupportStatus;
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.drawee.controller.ImageLoader;
 import com.facebook.fresco.samples.showcase.BaseShowcaseFragment;
 import com.facebook.fresco.samples.showcase.R;
 import com.facebook.fresco.samples.showcase.misc.CheckerBoardDrawable;
@@ -41,10 +41,10 @@ public class ImageFormatWebpFragment extends BaseShowcaseFragment {
 
   @Override
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-    final SimpleDraweeView draweeWebpStatic = view.findViewById(R.id.drawee_view_webp_static);
+    final ImageLoader draweeWebpStatic = view.findViewById(R.id.drawee_view_webp_static);
     draweeWebpStatic.setImageURI(sampleUris().createWebpStaticUri());
 
-    final SimpleDraweeView draweeWebpTranslucent =
+    final ImageLoader draweeWebpTranslucent =
         view.findViewById(R.id.drawee_view_webp_translucent);
     draweeWebpTranslucent.setImageURI(sampleUris().createWebpTranslucentUri());
 
@@ -59,7 +59,7 @@ public class ImageFormatWebpFragment extends BaseShowcaseFragment {
           }
         });
 
-    final SimpleDraweeView draweeWebpAnimated = view.findViewById(R.id.drawee_view_webp_animated);
+    final ImageLoader draweeWebpAnimated = view.findViewById(R.id.drawee_view_webp_animated);
     draweeWebpAnimated.setController(
         Fresco.newDraweeControllerBuilder()
             .setAutoPlayAnimations(true)

@@ -21,7 +21,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.drawee.controller.ImageLoader;
 import com.facebook.fresco.samples.showcase.BaseShowcaseFragment;
 import com.facebook.fresco.samples.showcase.R;
 import com.facebook.fresco.samples.showcase.misc.ImageUriProvider;
@@ -59,7 +59,7 @@ public class ImagePipelinePostProcessorFragment extends BaseShowcaseFragment
   private List<Entry> mSpinnerEntries = new ArrayList<>();
 
   private Button mButton;
-  private SimpleDraweeView mDraweeMain;
+  private ImageLoader mDraweeMain;
   private Spinner mSpinner;
   private Uri mUri;
 
@@ -76,7 +76,7 @@ public class ImagePipelinePostProcessorFragment extends BaseShowcaseFragment
     mUri = sampleUris().createSampleUri(ImageUriProvider.ImageSize.L);
 
     mButton = (Button) view.findViewById(R.id.button);
-    mDraweeMain = (SimpleDraweeView) view.findViewById(R.id.drawee_view);
+    mDraweeMain = (ImageLoader) view.findViewById(R.id.drawee_view);
     mSpinner = (Spinner) view.findViewById(R.id.spinner);
 
     mSpinner.setAdapter(new SimplePostprocessorAdapter());

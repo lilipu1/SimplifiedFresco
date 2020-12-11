@@ -24,7 +24,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.info.ImageOrigin;
 import com.facebook.drawee.backends.pipeline.info.ImageOriginListener;
 import com.facebook.drawee.backends.pipeline.info.ImageOriginUtils;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.drawee.controller.ImageLoader;
 import com.facebook.fresco.samples.showcase.BaseShowcaseFragment;
 import com.facebook.fresco.samples.showcase.R;
 import com.facebook.fresco.samples.showcase.misc.ImageUriProvider.ImageSize;
@@ -189,7 +189,7 @@ public class ImagePipelinePrefetchFragment extends BaseShowcaseFragment {
           public void onClick(View v) {
             if (!mShowing) {
               for (int i = 0; i < mDraweesHolder.getChildCount(); i++) {
-                SimpleDraweeView draweeView = (SimpleDraweeView) mDraweesHolder.getChildAt(i);
+                ImageLoader draweeView = (ImageLoader) mDraweesHolder.getChildAt(i);
                 draweeView.setController(
                     Fresco.newDraweeControllerBuilder()
                         .setOldController(draweeView.getController())
@@ -199,7 +199,7 @@ public class ImagePipelinePrefetchFragment extends BaseShowcaseFragment {
               }
             } else {
               for (int i = 0; i < mDraweesHolder.getChildCount(); i++) {
-                ((SimpleDraweeView) mDraweesHolder.getChildAt(i)).setController(null);
+                ((ImageLoader) mDraweesHolder.getChildAt(i)).setController(null);
               }
             }
             mShowing = !mShowing;

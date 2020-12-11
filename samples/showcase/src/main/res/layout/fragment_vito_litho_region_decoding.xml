@@ -14,7 +14,7 @@
       android:layout_height="wrap_content"
       >
 
-    <com.facebook.drawee.view.SimpleDraweeView
+    <com.facebook.drawee.controller.ImageLoader
         android:id="@+id/drawee_view_full"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
       android:textAppearance="?android:attr/textAppearanceSmall"
       />
 
-  <com.facebook.drawee.view.SimpleDraweeView
+  <com.facebook.drawee.controller.ImageLoader
       android:id="@+id/drawee_view_region"
       android:layout_width="match_parent"
       android:layout_height="match_parent"

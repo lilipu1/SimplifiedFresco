@@ -19,7 +19,7 @@ import com.facebook.datasource.RetainingDataSourceSupplier;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.drawee.controller.ControllerListener;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.drawee.controller.ImageLoader;
 import com.facebook.fresco.samples.showcase.BaseShowcaseFragment;
 import com.facebook.fresco.samples.showcase.R;
 import com.facebook.imagepipeline.image.CloseableImage;
@@ -60,7 +60,7 @@ public class RetainingDataSourceSupplierFragment extends BaseShowcaseFragment {
 
   @Override
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-    final SimpleDraweeView simpleDraweeView = view.findViewById(R.id.drawee_view);
+    final ImageLoader simpleDraweeView = view.findViewById(R.id.drawee_view);
     final RetainingDataSourceSupplier<CloseableReference<CloseableImage>> retainingSupplier =
         new RetainingDataSourceSupplier<>();
     simpleDraweeView.setController(

@@ -15,7 +15,7 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.drawee.controller.ImageLoader;
 import com.facebook.fresco.samples.showcase.BaseShowcaseFragment;
 import com.facebook.fresco.samples.showcase.R;
 import com.facebook.fresco.samples.showcase.misc.ImageUriProvider;
@@ -39,10 +39,10 @@ public class PartialRequestFragment extends BaseShowcaseFragment {
   public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
 
-    final SimpleDraweeView partialDrawee =
-        (SimpleDraweeView) view.findViewById(R.id.drawee_partial_img);
+    final ImageLoader partialDrawee =
+        (ImageLoader) view.findViewById(R.id.drawee_partial_img);
 
-    final SimpleDraweeView fullDrawee = (SimpleDraweeView) view.findViewById(R.id.drawee_full_img);
+    final ImageLoader fullDrawee = (ImageLoader) view.findViewById(R.id.drawee_full_img);
 
     final Button clearCacheButton = (Button) view.findViewById(R.id.clear_cache);
     clearCacheButton.setOnClickListener(
@@ -75,7 +75,7 @@ public class PartialRequestFragment extends BaseShowcaseFragment {
         });
   }
 
-  private void loadImageIntoDrawee(SimpleDraweeView draweeView, @Nullable BytesRange bytesRange) {
+  private void loadImageIntoDrawee(ImageLoader draweeView, @Nullable BytesRange bytesRange) {
     final ImageRequest imageRequest =
         ImageRequestBuilder.newBuilderWithSource(
                 sampleUris().createSampleUri(ImageUriProvider.ImageSize.L))

@@ -22,7 +22,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.drawee.controller.ImageLoader;
 import com.facebook.fresco.samples.showcase.BaseShowcaseFragment;
 import com.facebook.fresco.samples.showcase.R;
 import com.facebook.fresco.samples.showcase.common.ToggleAnimationClickListener;
@@ -33,7 +33,7 @@ public class DraweeMediaPickerFragment extends BaseShowcaseFragment {
   private static final int PERMISSION_REQUEST_READ_EXTERNAL_STORAGE = 0;
   private static final int REQUEST_CODE_PICK_MEDIA = 1;
 
-  private SimpleDraweeView mSimpleDraweeView;
+  private ImageLoader mSimpleDraweeView;
   private TextView mImagePath;
 
   @Nullable
@@ -45,7 +45,7 @@ public class DraweeMediaPickerFragment extends BaseShowcaseFragment {
 
   @Override
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-    mSimpleDraweeView = (SimpleDraweeView) view.findViewById(R.id.drawee_view);
+    mSimpleDraweeView = (ImageLoader) view.findViewById(R.id.drawee_view);
     mImagePath = (TextView) view.findViewById(R.id.image_path);
 
     mSimpleDraweeView.setOnClickListener(new ToggleAnimationClickListener(mSimpleDraweeView));

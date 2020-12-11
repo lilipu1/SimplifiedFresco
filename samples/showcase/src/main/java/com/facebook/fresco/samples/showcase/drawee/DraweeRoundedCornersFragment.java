@@ -25,7 +25,7 @@ import androidx.fragment.app.Fragment;
 import com.facebook.common.internal.Preconditions;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.generic.RoundingParams;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.drawee.controller.ImageLoader;
 import com.facebook.fresco.samples.showcase.BaseShowcaseFragment;
 import com.facebook.fresco.samples.showcase.R;
 import com.facebook.fresco.samples.showcase.common.SimpleScaleTypeAdapter;
@@ -44,11 +44,11 @@ public class DraweeRoundedCornersFragment extends BaseShowcaseFragment {
   private int mWindowBackgroundColor;
   private int mColorPrimary;
 
-  private SimpleDraweeView mDraweeRound;
-  private SimpleDraweeView mDraweeRadius;
-  private SimpleDraweeView mDraweeSome;
-  private SimpleDraweeView mDraweeSomeRtl;
-  private SimpleDraweeView mDraweeFancy;
+  private ImageLoader mDraweeRound;
+  private ImageLoader mDraweeRadius;
+  private ImageLoader mDraweeSome;
+  private ImageLoader mDraweeSomeRtl;
+  private ImageLoader mDraweeFancy;
 
   private CheckBox mShowBordersCheck;
   private CheckBox mScaleInsideBordersCheck;
@@ -145,11 +145,11 @@ public class DraweeRoundedCornersFragment extends BaseShowcaseFragment {
   }
 
   private void findDrawees(View view) {
-    mDraweeRound = (SimpleDraweeView) view.findViewById(R.id.drawee_round);
-    mDraweeRadius = (SimpleDraweeView) view.findViewById(R.id.drawee_radius);
-    mDraweeSome = (SimpleDraweeView) view.findViewById(R.id.drawee_some);
-    mDraweeSomeRtl = (SimpleDraweeView) view.findViewById(R.id.drawee_some_rtl);
-    mDraweeFancy = (SimpleDraweeView) view.findViewById(R.id.drawee_fancy);
+    mDraweeRound = (ImageLoader) view.findViewById(R.id.drawee_round);
+    mDraweeRadius = (ImageLoader) view.findViewById(R.id.drawee_radius);
+    mDraweeSome = (ImageLoader) view.findViewById(R.id.drawee_some);
+    mDraweeSomeRtl = (ImageLoader) view.findViewById(R.id.drawee_some_rtl);
+    mDraweeFancy = (ImageLoader) view.findViewById(R.id.drawee_fancy);
   }
 
   @SuppressWarnings("ResourceType")
@@ -168,7 +168,7 @@ public class DraweeRoundedCornersFragment extends BaseShowcaseFragment {
   }
 
   private void changeDraweeViewScaleType(
-      SimpleDraweeView draweeView, ScaleType scaleType, @Nullable PointF focusPoint) {
+          ImageLoader draweeView, ScaleType scaleType, @Nullable PointF focusPoint) {
     final GenericDraweeHierarchy hierarchy = draweeView.getHierarchy();
     hierarchy.setActualImageScaleType(scaleType);
     hierarchy.setActualImageFocusPoint(focusPoint != null ? focusPoint : new PointF(0.5f, 0.5f));
@@ -192,7 +192,7 @@ public class DraweeRoundedCornersFragment extends BaseShowcaseFragment {
     setShowBorder(mDraweeFancy, showBorder, scaleInsideBorder);
   }
 
-  private void setShowBorder(SimpleDraweeView draweeView, boolean show, boolean scaleInside) {
+  private void setShowBorder(ImageLoader draweeView, boolean show, boolean scaleInside) {
     final RoundingParams roundingParams =
         Preconditions.checkNotNull(draweeView.getHierarchy().getRoundingParams());
     if (show) {

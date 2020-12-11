@@ -25,7 +25,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.info.ImagePerfDataListener;
 import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.drawee.interfaces.DraweeController;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.drawee.controller.ImageLoader;
 import com.facebook.fresco.samples.showcase.BaseShowcaseFragment;
 import com.facebook.fresco.samples.showcase.R;
 import com.facebook.fresco.samples.showcase.misc.ImageUriProvider;
@@ -47,7 +47,7 @@ public class ImageFormatProgressiveJpegFragment extends BaseShowcaseFragment {
   private final DateFormat mDateFormat = new SimpleDateFormat("HH:mm:ss.SSS");
   private final ImagePerfDataListener mImagePerfDataListener = new LogcatImagePerfDataListener();
 
-  private SimpleDraweeView mSimpleDraweeView;
+  private ImageLoader mSimpleDraweeView;
   private boolean mProgressiveRenderingEnabled;
   private TextView mDebugOutput;
   private ScrollView mDebugOutputScrollView;
@@ -81,7 +81,7 @@ public class ImageFormatProgressiveJpegFragment extends BaseShowcaseFragment {
     progressBarDrawable.setBackgroundColor(
         getResources().getColor(R.color.progress_bar_background));
 
-    mSimpleDraweeView = (SimpleDraweeView) view.findViewById(R.id.drawee_view);
+    mSimpleDraweeView = (ImageLoader) view.findViewById(R.id.drawee_view);
     mSimpleDraweeView.getHierarchy().setProgressBarImage(progressBarDrawable);
 
     mDebugOutput = (TextView) view.findViewById(R.id.debug_output);

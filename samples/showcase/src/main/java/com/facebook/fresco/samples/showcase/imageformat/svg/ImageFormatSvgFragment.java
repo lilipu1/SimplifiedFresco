@@ -18,7 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.DialogFragment;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.drawee.controller.ImageLoader;
 import com.facebook.fresco.samples.showcase.BaseShowcaseFragment;
 import com.facebook.fresco.samples.showcase.CustomImageFormatConfigurator;
 import com.facebook.fresco.samples.showcase.R;
@@ -27,7 +27,7 @@ import com.facebook.fresco.samples.showcase.misc.CheckerBoardDrawable;
 /** SVG example. It has a toggle to enable / disable SVG support and displays 1 image. */
 public class ImageFormatSvgFragment extends BaseShowcaseFragment {
 
-  private SimpleDraweeView mSimpleDraweeView;
+  private ImageLoader mSimpleDraweeView;
   private ShowRestartMessageDialog mShowRestartMessageDialog;
 
   @Nullable
@@ -39,7 +39,7 @@ public class ImageFormatSvgFragment extends BaseShowcaseFragment {
 
   @Override
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-    mSimpleDraweeView = (SimpleDraweeView) view.findViewById(R.id.drawee_view);
+    mSimpleDraweeView = (ImageLoader) view.findViewById(R.id.drawee_view);
     mSimpleDraweeView.setImageURI(sampleUris().createSvgUri());
 
     final SwitchCompat switchBackground = (SwitchCompat) view.findViewById(R.id.switch_background);

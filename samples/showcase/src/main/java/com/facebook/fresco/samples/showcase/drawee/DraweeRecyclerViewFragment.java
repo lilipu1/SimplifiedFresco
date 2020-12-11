@@ -18,7 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.drawee.controller.ImageLoader;
 import com.facebook.fresco.samples.showcase.BaseShowcaseFragment;
 import com.facebook.fresco.samples.showcase.R;
 import com.facebook.fresco.samples.showcase.misc.ImageSourceSpinner;
@@ -133,7 +133,7 @@ public class DraweeRecyclerViewFragment extends BaseShowcaseFragment {
 
     private static final Random sRandom = new Random();
 
-    private final SimpleDraweeView mSimpleDraweeView;
+    private final ImageLoader mSimpleDraweeView;
 
     SimpleViewHolder(View itemView) {
       super(itemView);

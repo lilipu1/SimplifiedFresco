@@ -20,7 +20,7 @@ import com.facebook.common.references.CloseableReference;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.drawee.controller.ControllerListener;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.drawee.controller.ImageLoader;
 import com.facebook.fresco.samples.showcase.BaseShowcaseFragment;
 import com.facebook.fresco.samples.showcase.R;
 import com.facebook.fresco.samples.showcase.imagepipeline.widget.ResizableFrameLayout;
@@ -38,9 +38,9 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
 /** Simple region decoding example that renders the original image and a selected region. */
 public class ImagePipelineRegionDecodingFragment extends BaseShowcaseFragment {
 
-  private SimpleDraweeView mFullDraweeView;
+  private ImageLoader mFullDraweeView;
   private ResizableFrameLayout mSelectedRegion;
-  private SimpleDraweeView mRegionDraweeView;
+  private ImageLoader mRegionDraweeView;
   private Uri mUri;
   private @Nullable ImageInfo mImageInfo;
 
@@ -82,7 +82,7 @@ public class ImagePipelineRegionDecodingFragment extends BaseShowcaseFragment {
         sampleUris()
             .createSampleUri(ImageUriProvider.ImageSize.L, ImageUriProvider.Orientation.LANDSCAPE);
 
-    mFullDraweeView = (SimpleDraweeView) view.findViewById(R.id.drawee_view_full);
+    mFullDraweeView = (ImageLoader) view.findViewById(R.id.drawee_view_full);
     mFullDraweeView.setController(
         Fresco.newDraweeControllerBuilder()
             .setUri(mUri)
@@ -93,7 +93,7 @@ public class ImagePipelineRegionDecodingFragment extends BaseShowcaseFragment {
     mSelectedRegion.init(view.findViewById(R.id.btn_resize));
     mSelectedRegion.setSizeChangedListener(mSizeChangedListener);
 
-    mRegionDraweeView = (SimpleDraweeView) view.findViewById(R.id.drawee_view_region);
+    mRegionDraweeView = (ImageLoader) view.findViewById(R.id.drawee_view_region);
     mRegionDraweeView.setOnClickListener(
         new View.OnClickListener() {
           @Override

@@ -22,7 +22,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.generic.RoundingParams;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.drawee.controller.ImageLoader;
 import com.facebook.fresco.samples.showcase.BaseShowcaseFragment;
 import com.facebook.fresco.samples.showcase.R;
 import com.facebook.fresco.samples.showcase.misc.ImageUriProvider;
@@ -51,7 +51,7 @@ public class DraweeHierarchyFragment extends BaseShowcaseFragment {
                 ImageUriProvider.UriModification.CACHE_BREAKER);
     final Uri uriFailure = sampleUris().getNonExistingUri();
 
-    final SimpleDraweeView draweeView = view.findViewById(R.id.drawee);
+    final ImageLoader draweeView = view.findViewById(R.id.drawee);
     final SwitchCompat retrySwitch = view.findViewById(R.id.retry_enabled);
 
     //noinspection deprecation
@@ -126,7 +126,7 @@ public class DraweeHierarchyFragment extends BaseShowcaseFragment {
         });
   }
 
-  private void setUri(SimpleDraweeView draweeView, Uri uri, boolean retryEnabled) {
+  private void setUri(ImageLoader draweeView, Uri uri, boolean retryEnabled) {
     draweeView.setController(
         Fresco.newDraweeControllerBuilder()
             .setOldController(draweeView.getController())

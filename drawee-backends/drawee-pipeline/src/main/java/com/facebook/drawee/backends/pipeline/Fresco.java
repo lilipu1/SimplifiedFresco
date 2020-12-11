@@ -9,7 +9,7 @@ package com.facebook.drawee.backends.pipeline;
 
 import android.content.Context;
 import com.facebook.common.logging.FLog;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.drawee.controller.ImageLoader;
 import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.core.ImagePipelineFactory;
@@ -120,7 +120,7 @@ public class Fresco {
     }
     sDraweeControllerBuilderSupplier =
         new PipelineDraweeControllerBuilderSupplier(context, draweeConfig);
-    SimpleDraweeView.initialize(sDraweeControllerBuilderSupplier);
+    ImageLoader.initialize(sDraweeControllerBuilderSupplier);
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.endSection();
     }
@@ -148,7 +148,7 @@ public class Fresco {
   /** Shuts Fresco down. */
   public static void shutDown() {
     sDraweeControllerBuilderSupplier = null;
-    SimpleDraweeView.shutDown();
+    ImageLoader.shutDown();
     ImagePipelineFactory.shutDown();
   }
 

@@ -17,7 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.drawee.controller.ImageLoader;
 import com.facebook.fresco.samples.showcase.BaseShowcaseFragment;
 import com.facebook.fresco.samples.showcase.R;
 import com.facebook.fresco.samples.showcase.misc.ImageUriProvider;
@@ -38,8 +38,8 @@ public class DraweeTransitionFragment extends BaseShowcaseFragment {
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     final Uri imageUri = sampleUris().createSampleUri(ImageUriProvider.ImageSize.M);
 
-    final SimpleDraweeView simpleDraweeView =
-        (SimpleDraweeView) view.findViewById(R.id.drawee_view);
+    final ImageLoader simpleDraweeView =
+        (ImageLoader) view.findViewById(R.id.drawee_view);
     // You have to enable legacy visibility handling for the start view in order for this to work
     simpleDraweeView.setLegacyVisibilityHandlingEnabled(true);
     simpleDraweeView.setImageURI(imageUri);

@@ -16,7 +16,7 @@ import androidx.annotation.Nullable;
 import com.facebook.drawee.backends.pipeline.DraweeConfig;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.controller.AbstractDraweeController;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.drawee.controller.ImageLoader;
 import com.facebook.fresco.samples.showcase.BaseShowcaseFragment;
 import com.facebook.fresco.samples.showcase.CustomImageFormatConfigurator;
 import com.facebook.fresco.samples.showcase.R;
@@ -47,7 +47,7 @@ public class ImageFormatOverrideExample extends BaseShowcaseFragment {
 
   @Override
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-    SimpleDraweeView simpleDraweeView = (SimpleDraweeView) view.findViewById(R.id.drawee_view);
+    ImageLoader simpleDraweeView = (ImageLoader) view.findViewById(R.id.drawee_view);
 
     ImageDecodeOptions imageDecodeOptionsWithCustomDecoder =
         new ImageDecodeOptionsBuilder().setCustomImageDecoder(CUSTOM_COLOR_DECODER).build();

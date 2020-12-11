@@ -19,7 +19,7 @@ import androidx.annotation.Nullable;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.drawee.controller.ControllerListener;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.drawee.controller.ImageLoader;
 import com.facebook.fresco.samples.showcase.BaseShowcaseFragment;
 import com.facebook.fresco.samples.showcase.R;
 import com.facebook.fresco.samples.showcase.imagepipeline.widget.ResizableFrameLayout;
@@ -33,10 +33,10 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
 /** Simple experimental Fresco Vito fragment that just displays an image. */
 public class FrescoVitoLithoRegionDecodeFragment extends BaseShowcaseFragment {
 
-  private SimpleDraweeView mFullDraweeView;
+  private ImageLoader mFullDraweeView;
   private ResizableFrameLayout mSelectedParentBounds;
   private ResizableFrameLayout mSelectedFocusPoint;
-  private SimpleDraweeView mRegionDraweeView;
+  private ImageLoader mRegionDraweeView;
   private Uri mUri;
   private @Nullable ImageInfo mImageInfo;
 
@@ -79,7 +79,7 @@ public class FrescoVitoLithoRegionDecodeFragment extends BaseShowcaseFragment {
         sampleUris()
             .createSampleUri(ImageUriProvider.ImageSize.L, ImageUriProvider.Orientation.LANDSCAPE);
 
-    mFullDraweeView = (SimpleDraweeView) view.findViewById(R.id.drawee_view_full);
+    mFullDraweeView = (ImageLoader) view.findViewById(R.id.drawee_view_full);
     mFullDraweeView.setController(
         Fresco.newDraweeControllerBuilder()
             .setUri(mUri)
@@ -94,7 +94,7 @@ public class FrescoVitoLithoRegionDecodeFragment extends BaseShowcaseFragment {
     mSelectedFocusPoint.init(view.findViewById(R.id.btn_resize_focus_point));
     mSelectedFocusPoint.setSizeChangedListener(mSizeChangedListener);
 
-    mRegionDraweeView = (SimpleDraweeView) view.findViewById(R.id.drawee_view_region);
+    mRegionDraweeView = (ImageLoader) view.findViewById(R.id.drawee_view_region);
     mRegionDraweeView.setOnClickListener(
         new View.OnClickListener() {
           @Override

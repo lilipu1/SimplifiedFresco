@@ -17,11 +17,11 @@ import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.drawee.controller.ControllerListener;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.interfaces.SimpleDraweeControllerBuilder;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.drawee.controller.ImageLoader;
 import javax.annotation.Nullable;
 
-/** {@link SimpleDraweeView} with instrumentation. */
-public class InstrumentedDraweeView extends SimpleDraweeView implements Instrumented {
+/** {@link ImageLoader} with instrumentation. */
+public class InstrumentedDraweeView extends ImageLoader implements Instrumented {
 
   private Instrumentation mInstrumentation;
   private ControllerListener<Object> mListener;

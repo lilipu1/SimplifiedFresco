@@ -14,7 +14,7 @@
 
     <!-- static webp -->
 
-    <com.facebook.drawee.view.SimpleDraweeView
+    <com.facebook.drawee.controller.ImageLoader
         android:id="@+id/drawee_view_webp_static"
         android:layout_width="@dimen/drawee_width_medium"
         android:layout_height="@dimen/drawee_height_medium"
@@ -31,7 +31,7 @@
 
     <!-- translucent webp -->
 
-    <com.facebook.drawee.view.SimpleDraweeView
+    <com.facebook.drawee.controller.ImageLoader
         android:id="@+id/drawee_view_webp_translucent"
         android:layout_width="@dimen/drawee_width_medium"
         android:layout_height="@dimen/drawee_height_medium"
@@ -56,7 +56,7 @@
 
     <!-- animated webp -->
 
-    <com.facebook.drawee.view.SimpleDraweeView
+    <com.facebook.drawee.controller.ImageLoader
         android:id="@+id/drawee_view_webp_animated"
         android:layout_width="@dimen/drawee_width_medium"
         android:layout_height="@dimen/drawee_height_medium"

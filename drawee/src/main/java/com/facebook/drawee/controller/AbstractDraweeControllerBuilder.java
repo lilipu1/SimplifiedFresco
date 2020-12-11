@@ -9,6 +9,8 @@ package com.facebook.drawee.controller;
 
 import android.content.Context;
 import android.graphics.drawable.Animatable;
+import android.widget.ImageView;
+
 import com.facebook.common.internal.Objects;
 import com.facebook.common.internal.Preconditions;
 import com.facebook.common.internal.Supplier;
@@ -18,7 +20,6 @@ import com.facebook.datasource.FirstAvailableDataSourceSupplier;
 import com.facebook.datasource.IncreasingQualityDataSourceSupplier;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.interfaces.SimpleDraweeControllerBuilder;
-import com.facebook.drawee.view.DraweeView;
 import com.facebook.fresco.ui.common.ControllerListener2;
 import com.facebook.fresco.ui.common.LoggingListener;
 import com.facebook.imagepipeline.systrace.FrescoSystrace;
@@ -58,7 +59,7 @@ public abstract class AbstractDraweeControllerBuilder<
   // builder parameters
   private @Nullable Object mCallerContext;
   private @Nullable REQUEST mImageRequest;
-  private @Nullable DraweeView imageView;
+  private @Nullable ImageView imageView;
   private @Nullable REQUEST mLowResImageRequest;
   private @Nullable REQUEST[] mMultiImageRequests;
   private boolean mTryCacheOnlyFirst;
@@ -126,13 +127,13 @@ public abstract class AbstractDraweeControllerBuilder<
     return getThis();
   }
 
-  public BUILDER setImageView(DraweeView draweeView){
+  public BUILDER setImageView(ImageView draweeView){
     imageView = draweeView;
     return getThis();
   }
 
   @Nullable
-  public DraweeView getImageView() {
+  public ImageView getImageView() {
     return imageView;
   }
 

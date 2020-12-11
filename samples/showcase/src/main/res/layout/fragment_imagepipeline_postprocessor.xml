@@ -18,7 +18,7 @@
       android:layout_marginTop="@dimen/margin_medium"
       />
 
-  <com.facebook.drawee.view.SimpleDraweeView
+  <com.facebook.drawee.controller.ImageLoader
       android:id="@+id/drawee_view"
       android:layout_width="match_parent"
       android:layout_height="@dimen/drawee_height_medium"

@@ -24,7 +24,7 @@
           android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
           android:text="@string/drawee_rounded_corners_as_circle"
           />
-      <com.facebook.drawee.view.SimpleDraweeView
+      <com.facebook.drawee.controller.ImageLoader
           android:id="@+id/drawee_round"
           style="@style/DraweeRoundedCorners.Drawee"
           app:roundAsCircle="true"
@@ -36,7 +36,7 @@
           android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
           android:text="@string/drawee_rounded_corners_radius"
           />
-      <com.facebook.drawee.view.SimpleDraweeView
+      <com.facebook.drawee.controller.ImageLoader
           android:id="@+id/drawee_radius"
           style="@style/DraweeRoundedCorners.Drawee"
           app:roundedCornerRadius="16dp"
@@ -48,7 +48,7 @@
           android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
           android:text="@string/drawee_rounded_corners_some"
           />
-      <com.facebook.drawee.view.SimpleDraweeView
+      <com.facebook.drawee.controller.ImageLoader
           android:id="@+id/drawee_some"
           style="@style/DraweeRoundedCorners.Drawee"
           app:roundedCornerRadius="16dp"
@@ -62,7 +62,7 @@
           android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
           android:text="@string/drawee_rounded_corners_some_rtl"
           />
-      <com.facebook.drawee.view.SimpleDraweeView
+      <com.facebook.drawee.controller.ImageLoader
           android:id="@+id/drawee_some_rtl"
           style="@style/DraweeRoundedCorners.Drawee"
           app:roundedCornerRadius="16dp"
@@ -76,7 +76,7 @@
           android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
           android:text="@string/drawee_rounded_corners_fancy"
           />
-      <com.facebook.drawee.view.SimpleDraweeView
+      <com.facebook.drawee.controller.ImageLoader
           android:id="@+id/drawee_fancy"
           style="@style/DraweeRoundedCorners.Drawee"
           />

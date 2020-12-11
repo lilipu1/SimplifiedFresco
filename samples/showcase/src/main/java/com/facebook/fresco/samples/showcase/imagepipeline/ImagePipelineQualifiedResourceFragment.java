@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import com.facebook.common.util.UriUtil;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.drawee.controller.ImageLoader;
 import com.facebook.fresco.samples.showcase.BaseShowcaseFragment;
 import com.facebook.fresco.samples.showcase.R;
 
@@ -41,7 +41,7 @@ public class ImagePipelineQualifiedResourceFragment extends BaseShowcaseFragment
 
   @Override
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-    SimpleDraweeView simpleDraweeView = (SimpleDraweeView) view.findViewById(R.id.drawee_view);
+    ImageLoader simpleDraweeView = (ImageLoader) view.findViewById(R.id.drawee_view);
     simpleDraweeView.setImageURI(QUALIFIED_RESOURCE_URI);
   }
 }

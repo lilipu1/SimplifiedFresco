@@ -45,7 +45,7 @@
       android:minWidth="80dp"
       >
 
-    <com.facebook.drawee.view.SimpleDraweeView
+    <com.facebook.drawee.controller.ImageLoader
         android:id="@+id/drawee_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

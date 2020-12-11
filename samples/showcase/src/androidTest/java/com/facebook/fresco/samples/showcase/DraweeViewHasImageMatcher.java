@@ -9,20 +9,20 @@ package com.facebook.fresco.samples.showcase;
 
 import android.view.View;
 import androidx.test.espresso.matcher.BoundedMatcher;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.drawee.controller.ImageLoader;
 import org.hamcrest.Description;
 
 class DraweeViewHasImageMatcher {
 
-  static BoundedMatcher<View, SimpleDraweeView> hasImage() {
-    return new BoundedMatcher<View, SimpleDraweeView>(SimpleDraweeView.class) {
+  static BoundedMatcher<View, ImageLoader> hasImage() {
+    return new BoundedMatcher<View, ImageLoader>(ImageLoader.class) {
       @Override
       public void describeTo(Description description) {
         description.appendText("has image");
       }
 
       @Override
-      public boolean matchesSafely(SimpleDraweeView draweeView) {
+      public boolean matchesSafely(ImageLoader draweeView) {
         return draweeView.getHierarchy().hasImage();
       }
     };

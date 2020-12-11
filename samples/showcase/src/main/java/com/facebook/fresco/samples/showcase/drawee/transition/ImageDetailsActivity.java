@@ -17,7 +17,7 @@ import android.view.MenuItem;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.drawee.controller.ImageLoader;
 import com.facebook.fresco.samples.showcase.R;
 
 /** Image details activity */
@@ -39,7 +39,7 @@ public class ImageDetailsActivity extends AppCompatActivity {
       actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
-    SimpleDraweeView simpleDraweeView = (SimpleDraweeView) findViewById(R.id.image);
+    ImageLoader simpleDraweeView = (ImageLoader) findViewById(R.id.image);
     simpleDraweeView.setImageURI(getIntent().getData());
 
     ScalingUtils.ScaleType toScaleType = ScalingUtils.ScaleType.FOCUS_CROP;

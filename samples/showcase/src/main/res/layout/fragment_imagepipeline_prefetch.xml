@@ -63,7 +63,7 @@
       android:layout_marginTop="@dimen/margin_medium"
       android:orientation="horizontal"
       >
-    <com.facebook.drawee.view.SimpleDraweeView
+    <com.facebook.drawee.controller.ImageLoader
         android:layout_width="0dp"
         android:layout_height="@dimen/drawee_height_medium"
         android:layout_weight="1"
@@ -71,7 +71,7 @@
         app:placeholderImageScaleType="center"
         app:actualImageScaleType="centerCrop"
         />
-    <com.facebook.drawee.view.SimpleDraweeView
+    <com.facebook.drawee.controller.ImageLoader
         android:layout_width="0dp"
         android:layout_height="@dimen/drawee_height_medium"
         android:layout_weight="1"

@@ -13,7 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.Nullable;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.drawee.controller.ImageLoader;
 import com.facebook.fresco.samples.showcase.BaseShowcaseFragment;
 import com.facebook.fresco.samples.showcase.R;
 import com.facebook.fresco.samples.showcase.misc.ImageUriProvider;
@@ -32,8 +32,8 @@ public class DraweeSimpleFragment extends BaseShowcaseFragment {
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     final Uri uri = sampleUris().createSampleUri(ImageUriProvider.ImageSize.M);
 
-    final SimpleDraweeView simpleDraweeView =
-        (SimpleDraweeView) view.findViewById(R.id.drawee_view);
+    final ImageLoader simpleDraweeView =
+        (ImageLoader) view.findViewById(R.id.drawee_view);
     simpleDraweeView.setImageURI(uri);
 
     view.findViewById(R.id.btn_random_uri)

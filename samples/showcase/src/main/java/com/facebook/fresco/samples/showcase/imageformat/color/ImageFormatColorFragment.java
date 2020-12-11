@@ -15,7 +15,7 @@ import android.widget.CompoundButton;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 import com.facebook.common.util.UriUtil;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.drawee.controller.ImageLoader;
 import com.facebook.fresco.samples.showcase.BaseShowcaseFragment;
 import com.facebook.fresco.samples.showcase.CustomImageFormatConfigurator;
 import com.facebook.fresco.samples.showcase.R;
@@ -28,8 +28,8 @@ import com.facebook.fresco.samples.showcase.misc.CheckerBoardDrawable;
  */
 public class ImageFormatColorFragment extends BaseShowcaseFragment {
 
-  private SimpleDraweeView mSimpleDraweeView1;
-  private SimpleDraweeView mSimpleDraweeView2;
+  private ImageLoader mSimpleDraweeView1;
+  private ImageLoader mSimpleDraweeView2;
 
   @Nullable
   @Override
@@ -40,8 +40,8 @@ public class ImageFormatColorFragment extends BaseShowcaseFragment {
 
   @Override
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-    mSimpleDraweeView1 = (SimpleDraweeView) view.findViewById(R.id.drawee1);
-    mSimpleDraweeView2 = (SimpleDraweeView) view.findViewById(R.id.drawee2);
+    mSimpleDraweeView1 = (ImageLoader) view.findViewById(R.id.drawee1);
+    mSimpleDraweeView2 = (ImageLoader) view.findViewById(R.id.drawee2);
 
     // Set a simple custom color resource as the image.
     // The format of custom_color1 is <color>#rrggbb</color>

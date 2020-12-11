@@ -25,7 +25,7 @@ import com.facebook.animated.giflite.GifDecoder;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeControllerBuilder;
 import com.facebook.drawee.controller.BaseControllerListener;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.drawee.controller.ImageLoader;
 import com.facebook.fresco.samples.showcase.BaseShowcaseFragment;
 import com.facebook.fresco.samples.showcase.R;
 import com.facebook.fresco.samples.showcase.misc.CheckerBoardDrawable;
@@ -41,7 +41,7 @@ public class ImageFormatGifFragment extends BaseShowcaseFragment {
   private Entry[] mSpinnerEntries;
 
   private Spinner mSpinner;
-  private SimpleDraweeView mSimpleDraweeView;
+  private ImageLoader mSimpleDraweeView;
   private @Nullable GifDecoder mGifDecoder;
   private boolean mAutoPlayEnabled;
 

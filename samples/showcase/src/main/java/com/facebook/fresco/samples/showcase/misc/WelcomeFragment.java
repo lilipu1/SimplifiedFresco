@@ -18,7 +18,7 @@ import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import androidx.annotation.Nullable;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.drawee.controller.ImageLoader;
 import com.facebook.fresco.samples.showcase.BaseShowcaseFragment;
 import com.facebook.fresco.samples.showcase.R;
 
@@ -37,7 +37,7 @@ public class WelcomeFragment extends BaseShowcaseFragment {
 
   @Override
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-    final SimpleDraweeView draweeView = (SimpleDraweeView) view.findViewById(R.id.drawee_view);
+    final ImageLoader draweeView = (ImageLoader) view.findViewById(R.id.drawee_view);
     draweeView.setActualImageResource(R.drawable.logo);
     draweeView.setOnClickListener(
         new View.OnClickListener() {

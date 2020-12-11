@@ -14,6 +14,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.widget.ImageView;
 
 import com.facebook.common.internal.ImmutableMap;
 import com.facebook.common.internal.Objects;
@@ -25,13 +26,12 @@ import com.facebook.datasource.DataSubscriber;
 import com.facebook.drawee.components.DeferredReleaser;
 import com.facebook.drawee.components.DraweeEventTracker;
 import com.facebook.drawee.interfaces.DraweeController;
-import com.facebook.drawee.view.DraweeView;
 import com.facebook.fresco.middleware.MiddlewareUtils;
 import com.facebook.fresco.ui.common.ControllerListener2;
 import com.facebook.fresco.ui.common.ControllerListener2.Extras;
 import com.facebook.fresco.ui.common.ForwardingControllerListener2;
 import com.facebook.imagepipeline.systrace.FrescoSystrace;
-import com.facebook.infer.annotation.ReturnsOwnership;
+
 import java.util.Map;
 import java.util.concurrent.Executor;
 import javax.annotation.Nullable;
@@ -89,7 +89,7 @@ public abstract class AbstractDraweeController<T, INFO>
   protected @Nullable ControllerListener<INFO> mControllerListener;
   protected ForwardingControllerListener2<INFO> mControllerListener2 =
       new ForwardingControllerListener2<>();
-  private DraweeView imageView;
+  private ImageView imageView;
 
   // Hierarchy
   private @Nullable Drawable mControllerOverlay;
@@ -121,11 +121,11 @@ public abstract class AbstractDraweeController<T, INFO>
     init(id, callerContext);
   }
 
-  public void setImageView(DraweeView imageView) {
+  public void setImageView(ImageView imageView) {
     this.imageView = imageView;
   }
 
-  public DraweeView getImageView() {
+  public ImageView getImageView() {
     return imageView;
   }
 

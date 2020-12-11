@@ -18,7 +18,7 @@ import android.widget.Spinner;
 import androidx.annotation.Nullable;
 
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.drawee.controller.ImageLoader;
 import com.facebook.fresco.samples.showcase.BaseShowcaseFragment;
 import com.facebook.fresco.samples.showcase.R;
 import com.facebook.fresco.samples.showcase.common.SimpleScaleTypeAdapter;
@@ -27,9 +27,9 @@ import com.facebook.fresco.samples.showcase.misc.ImageUriProvider;
 /** Simple drawee fragment that illustrates different scale types */
 public class DraweeScaleTypeFragment extends BaseShowcaseFragment {
 
-  private SimpleDraweeView mDraweeTop1;
-  private SimpleDraweeView mDraweeTop2;
-  private SimpleDraweeView mDraweeMain;
+  private ImageLoader mDraweeTop1;
+  private ImageLoader mDraweeTop2;
+  private ImageLoader mDraweeMain;
   private Spinner mSpinner;
 
   @Nullable
@@ -46,9 +46,9 @@ public class DraweeScaleTypeFragment extends BaseShowcaseFragment {
         imageUriProvider.createSampleUri(
             ImageUriProvider.ImageSize.M, ImageUriProvider.Orientation.PORTRAIT);
 
-    mDraweeTop1 = (SimpleDraweeView) view.findViewById(R.id.drawee_view_top_1);
-    mDraweeTop2 = (SimpleDraweeView) view.findViewById(R.id.drawee_view_top_2);
-    mDraweeMain = (SimpleDraweeView) view.findViewById(R.id.drawee_view);
+    mDraweeTop1 = (ImageLoader) view.findViewById(R.id.drawee_view_top_1);
+    mDraweeTop2 = (ImageLoader) view.findViewById(R.id.drawee_view_top_2);
+    mDraweeMain = (ImageLoader) view.findViewById(R.id.drawee_view);
     mSpinner = (Spinner) view.findViewById(R.id.spinner);
 
     mDraweeTop1.setImageURI(uri1);

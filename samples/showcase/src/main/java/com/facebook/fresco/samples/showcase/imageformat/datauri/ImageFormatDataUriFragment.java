@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.drawee.controller.ImageLoader;
 import com.facebook.fresco.samples.showcase.BaseShowcaseFragment;
 import com.facebook.fresco.samples.showcase.R;
 
@@ -49,7 +49,7 @@ public class ImageFormatDataUriFragment extends BaseShowcaseFragment {
 
   @Override
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-    final SimpleDraweeView simpleDraweeView = view.findViewById(R.id.drawee_view);
+    final ImageLoader simpleDraweeView = view.findViewById(R.id.drawee_view);
     simpleDraweeView.setImageURI(dataUri, null);
 
     final TextView uriContentTextView = view.findViewById(R.id.datauri_content_textview);
